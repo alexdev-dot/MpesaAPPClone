@@ -1,107 +1,36 @@
-# Mpesa App Clone 
-## Introduction
-The Mpesa App is a clone for the comprehensive mobile application for handling various financial transactions offered by Safaricom PLC. 
-The app simulates how users send and request money, withdraw funds, buy airtime, and manage Mshwari loans and savings.
-The app also provides a secure authentication system and supports both light and dark modes.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Features
-- Send Money: Transfer funds to other users quickly and securely.
-- Request Money: Send money requests to other users and update balances seamlessly.
-- Withdraw: Effortlessly withdraw funds from your Mpesa account.
-- Buy Airtime: Purchase airtime directly through the app.
-- Mshwari Loans and Savings: Access Mshwari loans and savings accounts with real-time balance updates.
-- Global Pay: Convert entered amounts using the latest exchange rates.
-- Authentication: Secure authentication with phone number OTP and fallback to Mpesa PIN if biometrics fail.
-- Adaptive UI: Supports both light and dark modes for a better user experience.
-- Spending Tracker: Track your spending and view detailed graphs of your expenses.
+## Getting Started
 
-## Screenshots
-### Main Views
-<p>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/home.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/transact.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/services.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/grow.png", width="200" hspace="4"/>
+First, run the development server:
 
-</p>
-
-### Transaction views
-<p>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/send.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/pay.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/withdraw.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/airtime.png", width="200" hspace="4"/>
-</p>
-
-### Mshwari and Global Pay views
-
-<p>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/mshwari.png", width="200" hspace="4"/>
-   <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/globalPay.png", width="200" hspace="4"/>
-  <img src="https://github.com/Huss3n/MpesaAppClone/blob/main/Screenshots/statements.png", width="200" hspace="4"/>
-</p>
-
-## Usage
-1. Sign Up/Login: Use your phone number to sign up or log in.
-2. Navigate: Use the menu to access different functionalities like sending money, requesting money, withdrawing funds, and buying airtime.
-3. Manage Transactions: Track and manage your transactions through the app.
-
-
-## Installation
-To run this project locally, follow these steps:
-
-1. Clone the repository
-```
-git clone https://github.com/Huss3n/MpesaAppClone
-cd mpesa-app
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-2. Install dependencies
-```
-pod install
-```
-3. Set up Firebase
-- Create a Firebase project on the  <a href="https://firebase.google.com"> Firebase Console.</a>
-- Add your app's bundle ID to the Firebase project
-- Download the GoogleService-Info.plist file from Firebase and place it in the project directory. Note that the app will crash without this file.
-- Turn on the phone number Authentication and Firestore database on your google console for the storage and authentication of users.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-4. Set up Exchange Rate API
-- Sign up at <a href="https://www.exchangerate-api.com/"> Exchange Rate API</a> to get your API key.
-- Add your Exchange Rate API key to the project on the file named Currency fetcher there is a var named apiKey
-  ```
-  let apiKey = "" 
-  ```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-5. Run the app
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Technologies Used
-1. Swift, SwiftUI
-2. Backend: Firebase (Firestore, Authentication)
-3. APIs: Exchange Rate API for currency conversion
-4. Security: Apple Local Authentication framework for biometrics and Mpesa PIN fallback
+## Learn More
 
-## Contributing
-Contributions are welcome! Please follow these steps to contribute:
-- Fork the repository.
-- Create a new branch.
-- Make your changes.
-- Submit a pull request.
+To learn more about Next.js, take a look at the following resources:
 
-## Disclaimer
-This app is a clone and is very similar to the real Mpesa app by Safaricom PLC. 
-It is intended for educational purposes only. The functionality and user experience are designed to mimic the real app, but it is not affiliated with or endorsed by Safaricom PLC.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Contact
-For any questions or feedback, please contact me at aisakhussein0@gmail.com.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deploy on Vercel
 
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-
-
-
-
-
-
-
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

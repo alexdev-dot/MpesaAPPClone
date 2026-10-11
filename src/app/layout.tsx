@@ -1,0 +1,62 @@
+import type { Metadata, Viewport } from "next";
+import { Open_Sans, Rubik } from "next/font/google";
+import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const rubik = Rubik({
+  variable: "--font-rubik",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+export const metadata: Metadata = {
+  title: "M-PESA",
+  description: "M-PESA mobile money clone built with Next.js",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "M-PESA",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#4CAF50",
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html
+      lang="en"
+      className={`${openSans.variable} ${rubik.variable} h-full antialiased`}
+    >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="apple-touch-icon" href="/web-app-manifest-192x192.png" />
+      </head>
+      <body className="min-h-full flex flex-col bg-white">
+        <ThemeProvider>
+          <AuthProvider>
+            <div className="w-full min-h-screen relative">
+              {children}
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
