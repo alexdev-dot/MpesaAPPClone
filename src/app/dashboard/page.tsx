@@ -563,7 +563,7 @@ export default function DashboardPage() {
         <div className="flex items-center mb-3">
           <h3 className="text-sm font-semibold text-gray-900">Explore & Discover Deals 🔥</h3>
         </div>
-        <div className="relative h-28 rounded-lg overflow-hidden">
+        <div className="relative h-48 rounded-lg overflow-hidden">
           <div
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{ opacity: currentSlide === 0 ? 1 : 0 }}
