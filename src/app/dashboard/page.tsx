@@ -177,8 +177,10 @@ export default function DashboardPage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const logoutMenuRef = useRef<HTMLDivElement>(null);
   const frequentDropdownRef = useRef<HTMLDivElement>(null);
+  const contentScrollRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalCards = 2;
+  const [isQRCodeCollapsed, setIsQRCodeCollapsed] = useState(false);
 
   // Get dynamic greeting based on time
   const getGreeting = () => {
@@ -220,6 +222,30 @@ export default function DashboardPage() {
     }, 10000); // Change slide every 10 seconds
 
     return () => clearInterval(intervalId);
+  }, []);
+
+  // Handle scroll to collapse QR code card
+  useEffect(() => {
+    const scrollElement = contentScrollRef.current;
+    const handleScroll = () => {
+      if (scrollElement) {
+        const scrollY = scrollElement.scrollTop;
+        if (scrollY > 50) {
+          setIsQRCodeCollapsed(true);
+        } else {
+          setIsQRCodeCollapsed(false);
+        }
+      }
+    };
+
+    if (scrollElement) {
+      scrollElement.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      if (scrollElement) {
+        scrollElement.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   const handleScroll = () => {
@@ -351,7 +377,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto">
+      <div ref={contentScrollRef} className="flex-1 overflow-y-auto">
       {/* Balance Cards - Horizontal Scroll */}
       <div className="mx-4 mt-2 shrink-0">
         <div
@@ -563,7 +589,7 @@ export default function DashboardPage() {
         <div className="flex items-center mb-3">
           <h3 className="text-sm font-semibold text-gray-900">Explore & Discover Deals 🔥</h3>
         </div>
-        <div className="relative h-48 rounded-lg overflow-hidden">
+        <div className="relative h-40 rounded-lg overflow-hidden">
           <div
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{ opacity: currentSlide === 0 ? 1 : 0 }}
@@ -628,6 +654,109 @@ export default function DashboardPage() {
           </button>
         </div>
       </div>
+      </div>
+
+      {/* Floating Avatar on Bottom Right */}
+      <div className="fixed bottom-24 right-4 w-16 h-16 bg-white rounded-lg shadow-lg flex items-center justify-center border-2 border-gray-200 z-50">
+        <img
+          src="/assets/zuri-avatar.png"
+          alt="Zuri Avatar"
+          className="w-14 h-14 rounded-lg object-cover"
+        />
+      </div>
+
+      {/* Floating QR Code below Avatar */}
+      <div
+        className={`fixed bottom-6 right-4 bg-white rounded-lg shadow-lg border-2 border-gray-200 z-50 flex items-center transition-all duration-300 ease-in-out ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
+      >
+        <div className={`w-10 h-10 bg-gray-100 rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
+          {/* Top-left corner marker outside QR code */}
+          <svg
+            viewBox="0 0 24 24"
+            className={`absolute w-5 h-5 transition-all duration-300 ${isQRCodeCollapsed ? 'top-0 left-0' : '-top-1 -left-1'}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 11V3H11"
+              stroke="#dc2626"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {/* Top-right corner marker outside QR code */}
+          <svg
+            viewBox="0 0 24 24"
+            className={`absolute w-5 h-5 transition-all duration-300 ${isQRCodeCollapsed ? 'top-0 right-0' : '-top-1 -right-1'}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 11V3H13"
+              stroke="#dc2626"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {/* Bottom-left corner marker outside QR code */}
+          <svg
+            viewBox="0 0 24 24"
+            className={`absolute w-5 h-5 transition-all duration-300 ${isQRCodeCollapsed ? 'bottom-0 left-0' : '-bottom-1 -left-1'}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 13V21H11"
+              stroke="#dc2626"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {/* Bottom-right corner marker outside QR code */}
+          <svg
+            viewBox="0 0 24 24"
+            className={`absolute w-5 h-5 transition-all duration-300 ${isQRCodeCollapsed ? 'bottom-0 right-0' : '-bottom-1 -right-1'}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 13V21H13"
+              stroke="#dc2626"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="2" width="6" height="6" rx="1" />
+            <rect x="4" y="4" width="2" height="2" fill="white" />
+            <rect x="16" y="2" width="6" height="6" rx="1" />
+            <rect x="18" y="4" width="2" height="2" fill="white" />
+            <rect x="2" y="16" width="6" height="6" rx="1" />
+            <rect x="4" y="18" width="2" height="2" fill="white" />
+            <rect x="10" y="2" width="2" height="2" />
+            <rect x="12" y="4" width="2" height="2" />
+            <rect x="14" y="6" width="2" height="2" />
+            <rect x="10" y="8" width="2" height="2" />
+            <rect x="12" y="10" width="2" height="2" />
+            <rect x="14" y="12" width="2" height="2" />
+            <rect x="10" y="14" width="2" height="2" />
+            <rect x="12" y="16" width="2" height="2" />
+            <rect x="16" y="10" width="2" height="2" />
+            <rect x="18" y="12" width="2" height="2" />
+            <rect x="20" y="14" width="2" height="2" />
+            <rect x="16" y="16" width="2" height="2" />
+            <rect x="18" y="18" width="2" height="2" />
+            <rect x="10" y="18" width="2" height="2" />
+            <rect x="12" y="20" width="2" height="2" />
+          </svg>
+        </div>
+        <div className={`flex flex-col flex-1 mr-4 ml-10 text-center ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>
+          <span className="text-sm font-semibold text-gray-900">Scan to Pay</span>
+        </div>
       </div>
     </div>
   );
