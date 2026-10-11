@@ -8,6 +8,12 @@ interface User {
   balance: number;
   mshwariBalance: number;
   mshwariSavings: number;
+  airtimeBalance: number;
+  dataBalance: string;
+  smsBalance: number;
+  bongaPoints: number;
+  fulizaBalance: number;
+  fulizaLimit: number;
 }
 
 interface AuthContextType {
@@ -29,19 +35,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const storedUser = localStorage.getItem("mpesa_user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const parsedUser = JSON.parse(storedUser);
+      // Add missing fields for existing users
+      const migratedUser = {
+        ...parsedUser,
+        fulizaBalance: parsedUser.fulizaBalance ?? 0,
+        fulizaLimit: parsedUser.fulizaLimit ?? 500,
+      };
+      setUser(migratedUser);
       setIsAuthenticated(true);
     }
   }, []);
 
   const login = (phoneNumber: string, pin: string) => {
-    if (phoneNumber.length === 10 && pin.length === 4) {
+    // Allow any PIN for development
+    if (phoneNumber.length === 10 && pin.length > 0) {
       const newUser: User = {
         phoneNumber,
-        name: "Hussein",
+        name: "Alex",
         balance: 175,
         mshwariBalance: 0,
         mshwariSavings: 15000,
+        airtimeBalance: 0,
+        dataBalance: "2.5 GB",
+        smsBalance: 120,
+        bongaPoints: 0,
+        fulizaBalance: 0,
+        fulizaLimit: 500,
       };
       setUser(newUser);
       setIsAuthenticated(true);

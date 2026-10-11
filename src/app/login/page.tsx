@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -9,8 +9,21 @@ export default function LoginPage() {
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
   const [isValidating, setIsValidating] = useState(false);
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router]);
+
+  // Auto-submit when PIN is complete
+  useEffect(() => {
+    if (pin.length === 4 && !isValidating) {
+      handleSubmit();
+    }
+  }, [pin, isValidating]);
 
   const handlePinChange = (value: string) => {
     if (value.length <= 4 && /^\d*$/.test(value)) {
