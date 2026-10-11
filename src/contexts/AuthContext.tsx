@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 interface User {
   phoneNumber: string;
   name: string;
+  email: string;
   balance: number;
   mshwariBalance: number;
   mshwariSavings: number;
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Add missing fields for existing users
       const migratedUser = {
         ...parsedUser,
+        email: parsedUser.email ?? "alex@example.com",
         fulizaBalance: parsedUser.fulizaBalance ?? 0,
         fulizaLimit: parsedUser.fulizaLimit ?? 500,
       };
@@ -53,6 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const newUser: User = {
         phoneNumber,
         name: "Alex",
+        email: "alex@example.com",
         balance: 175,
         mshwariBalance: 0,
         mshwariSavings: 15000,

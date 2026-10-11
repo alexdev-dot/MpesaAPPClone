@@ -171,11 +171,9 @@ export default function DashboardPage() {
   const router = useRouter();
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
-  const [showLogoutMenu, setShowLogoutMenu] = useState(false);
   const [showFrequentDropdown, setShowFrequentDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState("Apps");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const logoutMenuRef = useRef<HTMLDivElement>(null);
   const frequentDropdownRef = useRef<HTMLDivElement>(null);
   const contentScrollRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -197,14 +195,7 @@ export default function DashboardPage() {
   }, [isAuthenticated, user, router]);
 
   useEffect(() => {
-    setShowLogoutMenu(false);
-  }, [user]);
-
-  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (logoutMenuRef.current && !logoutMenuRef.current.contains(event.target as Node)) {
-        setShowLogoutMenu(false);
-      }
       if (frequentDropdownRef.current && !frequentDropdownRef.current.contains(event.target as Node)) {
         setShowFrequentDropdown(false);
       }
@@ -313,10 +304,10 @@ export default function DashboardPage() {
     <div className="h-screen bg-slate-100 flex flex-col overflow-hidden">
       {/* Header */}
       <div className="bg-white px-6 py-2 flex items-center shrink-0">
-        {/* Profile Icon with Dropdown Icon */}
-        <div className="relative -ml-2" ref={logoutMenuRef}>
+        {/* Profile Icon */}
+        <div className="relative -ml-2">
           <button
-            onClick={() => setShowLogoutMenu(!showLogoutMenu)}
+            onClick={() => router.push("/profile")}
             className="relative"
           >
             <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -326,26 +317,7 @@ export default function DashboardPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Dropdown Icon */}
-            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-gray-200 rounded-full flex items-center justify-center border-2 border-green-500">
-              <ChevronDown className="w-2.5 h-2.5 text-red-500" />
-            </div>
           </button>
-
-          {/* Logout Menu */}
-          {showLogoutMenu && (
-            <div className="absolute top-12 left-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 w-32">
-              <button
-                onClick={() => {
-                  logout();
-                  router.push("/login");
-                }}
-                className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-50 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Greeting and Name */}
@@ -634,7 +606,7 @@ export default function DashboardPage() {
       </div>
 
       {/* My Finances */}
-      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-3">
+      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-5">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-gray-900">My Finances</h3>
           <button className="text-sm text-green-600 font-medium flex items-center gap-1">
@@ -643,7 +615,7 @@ export default function DashboardPage() {
         </div>
         <div className="flex justify-start">
           <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
-            <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+            <div className="w-14 h-14 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/ziidi-trader.png"
                 alt="Ziidi Trader"
@@ -651,6 +623,25 @@ export default function DashboardPage() {
               />
             </div>
             <span className="text-xs text-center text-gray-700 font-medium">Ziidi Trader</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Entertainment */}
+      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-3">
+        <div className="flex items-center justify-start mb-3">
+          <h3 className="font-semibold text-gray-900">Entertainment</h3>
+        </div>
+        <div className="flex justify-start">
+          <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
+            <div className="w-14 h-14 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+              <img
+                src="/assets/baze.png"
+                alt="Baze"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="text-xs text-center text-gray-700 font-medium">Baze</span>
           </button>
         </div>
       </div>
