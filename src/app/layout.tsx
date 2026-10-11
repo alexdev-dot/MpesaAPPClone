@@ -3,6 +3,7 @@ import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -51,10 +52,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-startup-image" href="/assets/safaricom-mpesa.png" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="min-h-full flex flex-col bg-white">
         <ThemeProvider>
           <AuthProvider>
+            <ServiceWorkerRegistration />
             <div className="w-full min-h-screen relative">
               {children}
             </div>
