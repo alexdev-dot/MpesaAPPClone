@@ -46,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <link rel="apple-touch-icon" href="/web-app-manifest-192x192.png" />
+        <meta name="apple-mobile-web-app-title" content="M-PESA" />
       </head>
       <body className="min-h-full flex flex-col bg-white">
         <ThemeProvider>
