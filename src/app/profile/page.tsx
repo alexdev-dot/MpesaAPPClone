@@ -94,7 +94,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto pb-20">
+      <div className="flex-1 overflow-y-auto pb-4">
         {/* Profile Header Card */}
         <div className="bg-white ml-3 mr-4 mt-2 rounded-xl p-3 shadow-sm">
           <div className="flex items-start gap-4">
@@ -372,7 +372,7 @@ export default function ProfilePage() {
         </div>
 
         {/* App Version */}
-        <div className="mx-4">
+        <div className="mx-4 mt-4">
           <p className="text-xs text-gray-400">App Version 5.3.0</p>
         </div>
       </div>
