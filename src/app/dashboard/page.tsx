@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Search, Menu, Send, ArrowUpRight, Smartphone, Wifi, MessageSquare, Star, MoreHorizontal, ChevronRight, TrendingUp, CreditCard, Calendar, X, User, ChevronDown, Bell } from "lucide-react";
+import { Eye, EyeOff, Search, Menu, Send, ArrowUpRight, Smartphone, Wifi, MessageSquare, Star, MoreHorizontal, ChevronRight, TrendingUp, CreditCard, Calendar, X, User, ChevronDown, Bell, Wallet } from "lucide-react";
 
 // Custom PATA MORE icon component
 function PataMoreIcon({ className }: { className?: string }) {
@@ -64,6 +64,104 @@ function PataMoreIcon({ className }: { className?: string }) {
       >
         RE
       </text>
+    </svg>
+  );
+}
+
+// Custom Shopping Basket icon with red handle and green basket
+function ShoppingBasketIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Handle - Red */}
+      <path
+        d="M6 6L7.5 3C7.8 2.4 8.4 2 9 2H15C15.6 2 16.2 2.4 16.5 3L18 6"
+        stroke="#dc2626"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Basket body - Green */}
+      <path
+        d="M4 6H20L18.5 16C18.3 17.1 17.3 18 16.2 18H7.8C6.7 18 5.7 17.1 5.5 16L4 6Z"
+        stroke="#16a34a"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Basket lines - Green */}
+      <path
+        d="M8 10V14"
+        stroke="#16a34a"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M12 10V14"
+        stroke="#16a34a"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 10V14"
+        stroke="#16a34a"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+// Custom Home Internet icon with red Wi-Fi signal
+function HomeInternetIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* House - Green */}
+      <path
+        d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+        stroke="#16a34a"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Wi-Fi signal - Red with proper arcs */}
+      <path
+        d="M7 12C8.5 10.5 10.5 9.5 12 9.5C13.5 9.5 15.5 10.5 17 12"
+        stroke="#dc2626"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.5 14C9.5 13 10.7 12.5 12 12.5C13.3 12.5 14.5 13 15.5 14"
+        stroke="#dc2626"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 16C10.5 15.5 11.2 15 12 15C12.8 15 13.5 15.5 14 16"
+        stroke="#dc2626"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Dot - Red */}
+      <circle
+        cx="12"
+        cy="18"
+        r="1"
+        fill="#dc2626"
+      />
     </svg>
   );
 }
@@ -134,15 +232,16 @@ export default function DashboardPage() {
     label: string;
     color: string;
     image?: string;
+    hasCornerMarker?: boolean;
   }> = [
     { icon: Send, label: "Send Money", color: "bg-green-500", image: "/assets/icons/send.png" },
-    { icon: CreditCard, label: "Lipa na M-PESA", color: "bg-green-500", image: "/assets/icons/shopping-basket.png" },
-    { icon: ArrowUpRight, label: "Withdraw Money", color: "bg-green-500" },
+    { icon: ShoppingBasketIcon, label: "Lipa na M-PESA", color: "bg-green-500" },
+    { icon: Wallet, label: "Withdraw Money", color: "bg-green-500" },
     { icon: PataMoreIcon, label: "Buy Bundles", color: "bg-green-500" },
     { icon: ArrowUpRight, label: "International Transfer", color: "bg-green-500", image: "/assets/icons/earth-grid-symbol.png" },
-    { icon: MessageSquare, label: "Airtime Top up", color: "bg-green-500", image: "/assets/icons/phone-call.png" },
-    { icon: Star, label: "Tunukiwa Bundles", color: "bg-green-500" },
-    { icon: MoreHorizontal, label: "Home Internet", color: "bg-green-500", image: "/assets/icons/smart-home.png" },
+    { icon: MessageSquare, label: "Airtime Top up", color: "bg-green-500", image: "/assets/icons/phone-call.png", hasCornerMarker: true },
+    { icon: Star, label: "Tunukiwa Bundles", color: "bg-green-500", image: "/assets/icons/bundle-gift.png" },
+    { icon: HomeInternetIcon, label: "Home Internet", color: "bg-green-500" },
   ];
 
   const frequentTransactions = [
@@ -214,16 +313,16 @@ export default function DashboardPage() {
 
         {/* Right Side Icons */}
         <div className="ml-auto flex items-center gap-4">
-          <button className="relative w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <button className="relative w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" className="text-green-600" />
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" className="text-green-600" />
               <line x1="12" y1="8" x2="12" y2="14" className="text-red-500" strokeWidth="1.5" />
             </svg>
             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
           </button>
-          <button className="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" className="text-green-600" />
               <path d="m21 21-4.35-4.35" className="text-red-500" />
             </svg>
@@ -335,15 +434,36 @@ export default function DashboardPage() {
             return (
               <button
                 key={index}
-                className="flex flex-col items-center gap-2 p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                className="flex flex-col items-center gap-2 p-2 rounded-lg"
               >
-                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center relative">
                   {action.image ? (
-                    <img src={action.image} alt={action.label} className="w-5 h-5 object-contain" />
+                    <img src={action.image} alt={action.label} className="w-5 h-5 object-contain" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}} />
                   ) : action.icon === PataMoreIcon ? (
-                    <PataMoreIcon className="w-9 h-9" />
+                    <PataMoreIcon className="w-9 h-9 text-green-600" />
+                  ) : action.icon === ShoppingBasketIcon ? (
+                    <ShoppingBasketIcon className="w-5 h-5" />
+                  ) : action.icon === HomeInternetIcon ? (
+                    <HomeInternetIcon className="w-5 h-5" />
                   ) : (
                     <Icon className="w-5 h-5 text-green-600" />
+                  )}
+                  {/* Red corner marker for Airtime Top up */}
+                  {action.hasCornerMarker && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="absolute w-4 h-4 top-2 right-2"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13 3H21V11"
+                        stroke="#dc2626"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   )}
                 </div>
                 <span className="text-xs text-center text-gray-700 font-medium">{action.label}</span>
