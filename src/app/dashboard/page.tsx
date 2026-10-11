@@ -172,16 +172,20 @@ export default function DashboardPage() {
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
+  const [showFrequentDropdown, setShowFrequentDropdown] = useState(false);
+  const [activeTab, setActiveTab] = useState("Apps");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const logoutMenuRef = useRef<HTMLDivElement>(null);
+  const frequentDropdownRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const totalCards = 2;
 
   // Get dynamic greeting based on time
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning,";
-    if (hour < 17) return "Good Afternoon,";
-    return "Good Evening,";
+    if (hour < 12) return "Good morning,";
+    if (hour < 17) return "Good afternoon,";
+    return "Good evening,";
   };
 
   useEffect(() => {
@@ -199,10 +203,23 @@ export default function DashboardPage() {
       if (logoutMenuRef.current && !logoutMenuRef.current.contains(event.target as Node)) {
         setShowLogoutMenu(false);
       }
+      if (frequentDropdownRef.current && !frequentDropdownRef.current.contains(event.target as Node)) {
+        setShowFrequentDropdown(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Auto-transition slides
+  useEffect(() => {
+    const totalSlides = 4;
+    const intervalId = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 10000); // Change slide every 10 seconds
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const handleScroll = () => {
@@ -248,6 +265,9 @@ export default function DashboardPage() {
     { name: "John Doe", phone: "0722 123 456", type: "Send Money" },
     { name: "Jane Smith", phone: "0733 987 654", type: "Send Money" },
     { name: "Supermarket", phone: "Pay Bill 123456", type: "Pay Bill" },
+    { name: "Mary Johnson", phone: "0711 555 333", type: "Send Money" },
+    { name: "KPLC", phone: "Pay Bill 888880", type: "Pay Bill" },
+    { name: "Bob Wilson", phone: "0725 777 888", type: "Send Money" },
   ];
 
   const recentTransactions = [
@@ -264,9 +284,9 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="h-screen bg-slate-100 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="bg-white px-6 py-4 flex items-center">
+      <div className="bg-white px-6 py-2 flex items-center shrink-0">
         {/* Profile Icon with Dropdown Icon */}
         <div className="relative -ml-2" ref={logoutMenuRef}>
           <button
@@ -330,8 +350,10 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto">
       {/* Balance Cards - Horizontal Scroll */}
-      <div className="mx-4 mt-4">
+      <div className="mx-4 mt-2 shrink-0">
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
@@ -347,7 +369,7 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2 mb-1 ml-2">
               <div className="text-lg font-semibold text-gray-900">
                 {balanceVisible ? (
-                  formatBalance(user.balance)
+                  formatBalance(0)
                 ) : (
                   <div className="h-6 w-20 bg-gray-200 rounded animate-pulse" />
                 )}
@@ -365,7 +387,7 @@ export default function DashboardPage() {
             </div>
             <div className="text-xs text-gray-600 mb-2 ml-2">
               {balanceVisible ? (
-                `Available fuliza: ${formatBalance(user.fulizaBalance)}`
+                `Available fuliza: ${formatBalance(0)}`
               ) : (
                 <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
               )}
@@ -382,12 +404,12 @@ export default function DashboardPage() {
             <div className="flex justify-between items-center mb-2">
               <div className="flex flex-col items-start flex-1 ml-2">
                 <div className="text-xs font-medium text-gray-900 mb-0.5">Airtime</div>
-                <div className="text-lg font-semibold text-gray-900">KSh. {user.airtimeBalance}</div>
+                <div className="text-lg font-semibold text-gray-900">KSh. 0.00</div>
               </div>
               <div className="h-8 w-px bg-gray-300 mx-4" />
-              <div className="flex flex-col items-end flex-1 ml-4 mr-2">
-                <div className="text-xs font-medium text-gray-900 text-right">Bonga</div>
-                <div className="text-lg font-semibold text-gray-900 text-right">{user.bongaPoints} <span className="text-xs font-semibold text-gray-900">Points</span></div>
+              <div className="flex flex-col items-end flex-1 ml-4 mr-2 min-w-fit">
+                <div className="text-xs font-medium text-gray-900">Bonga</div>
+                <div className="text-lg font-semibold text-gray-900">0 <span className="text-xs font-semibold text-gray-900">Points</span></div>
               </div>
             </div>
             <button className="w-full py-1.5 mx-2 border border-green-500 text-green-600 font-medium rounded-lg hover:bg-green-50 transition-colors text-sm mt-auto">
@@ -397,7 +419,7 @@ export default function DashboardPage() {
         </div>
         </div>
         {/* Carousel Dots */}
-        <div className="flex justify-center gap-2 mt-3">
+        <div className="flex justify-center gap-2 mt-2">
           {Array.from({ length: totalCards }).map((_, index) => (
             <button
               key={index}
@@ -421,7 +443,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white mx-4 mt-4 rounded-md p-4">
+      <div className="bg-white mx-4 mt-2 rounded-md p-3 shrink-0">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-gray-900">Quick Actions</h3>
           <button className="text-sm text-green-600 font-medium flex items-center gap-1">
@@ -474,100 +496,138 @@ export default function DashboardPage() {
       </div>
 
       {/* Frequent Transactions */}
-      <div className="bg-white mx-4 mt-4 rounded-md p-4">
+      <div className="bg-white mx-4 mt-2 rounded-md p-3 shrink-0">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-gray-900">Frequent</h3>
-          <button className="text-sm text-green-600 font-medium">View All</button>
+          <button
+            onClick={() => setShowFrequentDropdown(!showFrequentDropdown)}
+            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <ChevronDown
+              className={`w-5 h-5 text-gray-600 transition-transform ${
+                showFrequentDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </button>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {frequentTransactions.map((transaction, index) => (
-            <button
-              key={index}
-              className="shrink-0 flex flex-col items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-lg font-semibold text-green-700">
-                  {transaction.name.charAt(0)}
-                </span>
-              </div>
-              <span className="text-xs text-center text-gray-700 font-medium max-w-20 truncate">
-                {transaction.name}
-              </span>
-              <span className="text-xs text-center text-gray-500 max-w-20 truncate">
-                {transaction.phone}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
 
-      {/* Recent Transactions */}
-      <div className="bg-white mx-4 mt-4 rounded-md p-4">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">Recent Transactions</h3>
-          <button className="text-sm text-green-600 font-medium">See All</button>
-        </div>
-        <div className="space-y-3">
-          {recentTransactions.map((transaction) => (
-            <button
-              key={transaction.id}
-              className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    transaction.type === "received"
-                      ? "bg-green-100"
-                      : transaction.type === "sent"
-                      ? "bg-red-100"
-                      : "bg-blue-100"
+        {/* Frequent Dropdown with Tabs */}
+        {showFrequentDropdown && (
+          <div className="mt-3">
+            {/* Tabs */}
+            <div className="bg-slate-100 rounded-2xl flex mb-4">
+              {["Apps", "Send", "Pay", "Bundles"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`flex-1 px-4 py-1 text-sm font-medium rounded-xl transition-colors ${
+                    activeTab === tab
+                      ? "bg-green-500 text-white shadow-sm"
+                      : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
                   }`}
                 >
-                  {transaction.type === "received" ? (
-                    <ArrowUpRight className="w-5 h-5 text-green-600 rotate-45" />
-                  ) : transaction.type === "sent" ? (
-                    <Send className="w-5 h-5 text-red-600" />
-                  ) : (
-                    <CreditCard className="w-5 h-5 text-blue-600" />
-                  )}
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            <div className="py-4">
+              {activeTab === "Apps" && (
+                <div className="text-center text-gray-500 text-sm">
+                  No apps added yet
                 </div>
-                <div className="text-left">
-                  <div className="text-sm font-medium text-gray-900">{transaction.description}</div>
-                  <div className="text-xs text-gray-500">{transaction.recipient}</div>
-                  <div className="text-xs text-gray-400">{transaction.date}</div>
+              )}
+              {activeTab === "Send" && (
+                <div className="text-center text-gray-500 text-sm">
+                  No frequent contacts for sending
                 </div>
-              </div>
-              <div
-                className={`text-sm font-semibold ${
-                  transaction.amount > 0 ? "text-green-600" : "text-gray-900"
-                }`}
-              >
-                {transaction.amount > 0 ? "+" : ""}
-                {formatBalance(Math.abs(transaction.amount))}
-              </div>
-            </button>
-          ))}
-        </div>
+              )}
+              {activeTab === "Pay" && (
+                <div className="text-center text-gray-500 text-sm">
+                  No frequent payees
+                </div>
+              )}
+              {activeTab === "Bundles" && (
+                <div className="text-center text-gray-500 text-sm">
+                  No frequent bundle purchases
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Monthly Spending Summary */}
-      <div className="bg-white mx-4 mt-4 rounded-md p-4 mb-4">
+      <div className="mx-4 mt-2 mb-4">
+        <div className="flex items-center mb-3">
+          <h3 className="text-sm font-semibold text-gray-900">Explore & Discover Deals 🔥</h3>
+        </div>
+        <div className="relative h-28 rounded-lg overflow-hidden">
+          <div
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: currentSlide === 0 ? 1 : 0 }}
+          >
+            <img
+              src="/assets/banner/slide1.png"
+              alt="Deal 1"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: currentSlide === 1 ? 1 : 0 }}
+          >
+            <img
+              src="/assets/banner/slide2.jpg"
+              alt="Deal 2"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: currentSlide === 2 ? 1 : 0 }}
+          >
+            <img
+              src="/assets/banner/slide3.jpg"
+              alt="Deal 3"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: currentSlide === 3 ? 1 : 0 }}
+          >
+            <img
+              src="/assets/banner/slide4.jpg"
+              alt="Deal 4"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* My Finances */}
+      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-3">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">Monthly Spending</h3>
-          <button className="text-sm text-green-600 font-medium">View Details</button>
+          <h3 className="font-semibold text-gray-900">My Finances</h3>
+          <button className="text-sm text-green-600 font-medium flex items-center gap-1">
+            View All <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
-        <div className="bg-linear-to-r from-green-500 to-green-600 rounded-md p-4 text-white">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm opacity-90">Total Spent</span>
-            <TrendingUp className="w-5 h-5" />
-          </div>
-          <div className="text-2xl font-bold mb-1">{formatBalance(monthlySpending.total)}</div>
-          <div className="flex items-center gap-2 text-sm opacity-90">
-            <Calendar className="w-4 h-4" />
-            <span>{monthlySpending.period}</span>
-            <span>• {monthlySpending.transactions} transactions</span>
-          </div>
+        <div className="flex justify-start">
+          <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
+            <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+              <img
+                src="/assets/ziidi-trader.png"
+                alt="Ziidi Trader"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="text-xs text-center text-gray-700 font-medium">Ziidi Trader</span>
+          </button>
         </div>
+      </div>
       </div>
     </div>
   );

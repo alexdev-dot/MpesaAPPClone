@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans, Rubik } from "next/font/google";
+import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
 });
 
-const rubik = Rubik({
-  variable: "--font-rubik",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${rubik.variable} h-full antialiased`}
+      className={`${roboto.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
