@@ -21,7 +21,7 @@ function PataMoreIcon({ className }: { className?: string }) {
         textAnchor="start"
         fontSize="7"
         fontWeight="bold"
-        fill="#16a34a"
+        fill="var(--mpesa-green)"
         fontFamily="Arial, sans-serif"
       >
         PATA
@@ -34,7 +34,7 @@ function PataMoreIcon({ className }: { className?: string }) {
         textAnchor="middle"
         fontSize="7"
         fontWeight="bold"
-        fill="#16a34a"
+        fill="var(--mpesa-green)"
         fontFamily="Arial, sans-serif"
       >
         M
@@ -48,7 +48,7 @@ function PataMoreIcon({ className }: { className?: string }) {
         height="7"
         rx="2"
         fill="transparent"
-        stroke="#dc2626"
+        stroke="var(--mpesa-red)"
         strokeWidth="1.5"
       />
 
@@ -59,7 +59,7 @@ function PataMoreIcon({ className }: { className?: string }) {
         textAnchor="middle"
         fontSize="7"
         fontWeight="bold"
-        fill="#16a34a"
+        fill="var(--mpesa-green)"
         fontFamily="Arial, sans-serif"
       >
         RE
@@ -80,7 +80,7 @@ function ShoppingBasketIcon({ className }: { className?: string }) {
       {/* Handle - Red */}
       <path
         d="M6 6L7.5 3C7.8 2.4 8.4 2 9 2H15C15.6 2 16.2 2.4 16.5 3L18 6"
-        stroke="#dc2626"
+        stroke="var(--mpesa-red)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -88,7 +88,7 @@ function ShoppingBasketIcon({ className }: { className?: string }) {
       {/* Basket body - Green */}
       <path
         d="M4 6H20L18.5 16C18.3 17.1 17.3 18 16.2 18H7.8C6.7 18 5.7 17.1 5.5 16L4 6Z"
-        stroke="#16a34a"
+        stroke="var(--mpesa-green)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -96,19 +96,19 @@ function ShoppingBasketIcon({ className }: { className?: string }) {
       {/* Basket lines - Green */}
       <path
         d="M8 10V14"
-        stroke="#16a34a"
+        stroke="var(--mpesa-green)"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M12 10V14"
-        stroke="#16a34a"
+        stroke="var(--mpesa-green)"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M16 10V14"
-        stroke="#16a34a"
+        stroke="var(--mpesa-green)"
         strokeWidth="2"
         strokeLinecap="round"
       />
@@ -128,7 +128,7 @@ function HomeInternetIcon({ className }: { className?: string }) {
       {/* House - Green */}
       <path
         d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
-        stroke="#16a34a"
+        stroke="var(--mpesa-green)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -136,21 +136,21 @@ function HomeInternetIcon({ className }: { className?: string }) {
       {/* Wi-Fi signal - Red with proper arcs */}
       <path
         d="M7 12C8.5 10.5 10.5 9.5 12 9.5C13.5 9.5 15.5 10.5 17 12"
-        stroke="#dc2626"
+        stroke="var(--mpesa-red)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M8.5 14C9.5 13 10.7 12.5 12 12.5C13.3 12.5 14.5 13 15.5 14"
-        stroke="#dc2626"
+        stroke="var(--mpesa-red)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M10 16C10.5 15.5 11.2 15 12 15C12.8 15 13.5 15.5 14 16"
-        stroke="#dc2626"
+        stroke="var(--mpesa-red)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -160,8 +160,54 @@ function HomeInternetIcon({ className }: { className?: string }) {
         cx="12"
         cy="18"
         r="1"
-        fill="#dc2626"
+        fill="var(--mpesa-red)"
       />
+    </svg>
+  );
+}
+
+// Custom TUUNZA MAPATA icon with white text inside a circle
+function TuunzaMapataIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 56 56"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Circle background */}
+      <circle
+        cx="28"
+        cy="28"
+        r="26"
+        fill="var(--mpesa-green)"
+      />
+
+      {/* TUUNZA at the top */}
+      <text
+        x="28"
+        y="22"
+        textAnchor="middle"
+        fontSize="9"
+        fontWeight="bold"
+        fill="white"
+        fontFamily="Arial, sans-serif"
+      >
+        TUUNZA
+      </text>
+
+      {/* MAPATA at the bottom */}
+      <text
+        x="28"
+        y="38"
+        textAnchor="middle"
+        fontSize="9"
+        fontWeight="bold"
+        fill="white"
+        fontFamily="Arial, sans-serif"
+      >
+        MAPATA
+      </text>
     </svg>
   );
 }
@@ -301,9 +347,9 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="h-screen bg-slate-100 flex flex-col overflow-hidden">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="bg-white px-6 py-2 flex items-center shrink-0">
+      <div className="bg-background px-6 py-2 flex items-center shrink-0 border-b border-border">
         {/* Profile Icon */}
         <div className="relative -ml-2">
           <button
@@ -317,29 +363,33 @@ export default function DashboardPage() {
                 className="w-full h-full object-cover"
               />
             </div>
+            {/* Dropdown Icon */}
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gray-200 rounded-full flex items-center justify-center border-2 border-mpesa-green">
+              <ChevronDown className="w-2.5 h-2.5 text-mpesa-red" strokeWidth={2} />
+            </div>
           </button>
         </div>
 
         {/* Greeting and Name */}
         <div className="flex flex-col ml-3">
-          <div className="text-sm text-gray-500">{getGreeting()}</div>
+          <div className="text-sm text-muted-foreground">{getGreeting()}</div>
           <div className="flex items-center gap-2">
-            <span className="text-gray-900">{user?.name}</span>
+            <span className="text-foreground">{user?.name}</span>
             <span className="text-xl">👋</span>
           </div>
         </div>
 
         {/* Right Side Icons */}
         <div className="ml-auto flex items-center gap-4">
-          <button className="relative w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
+          <button className="relative w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" className="text-green-600" />
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" className="text-green-600" />
               <line x1="12" y1="8" x2="12" y2="14" className="text-red-500" strokeWidth="1.5" />
             </svg>
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-background"></span>
           </button>
-          <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200">
+          <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" className="text-green-600" />
               <path d="m21 21-4.35-4.35" className="text-red-500" />
@@ -359,58 +409,58 @@ export default function DashboardPage() {
         >
           <div className="flex gap-3 pb-2">
           {/* M-PESA Balance Card */}
-          <div className="bg-white rounded-xl p-4 shrink-0 w-72 flex flex-col relative overflow-hidden">
+          <div className="bg-card rounded-xl p-4 shrink-0 w-72 flex flex-col relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-1.25 bg-linear-to-b from-green-500 to-blue-500 rounded-l-xl" />
             <div className="flex items-center justify-between mb-2 ml-2">
-              <span className="text-sm font-medium text-green-600">M-PESA Balance</span>
+              <span className="text-sm font-medium text-mpesa-green">M-PESA Balance</span>
             </div>
             <div className="flex items-center gap-2 mb-1 ml-2">
-              <div className="text-lg font-semibold text-gray-900">
+              <div className="text-lg font-semibold text-foreground">
                 {balanceVisible ? (
                   formatBalance(0)
                 ) : (
-                  <div className="h-6 w-20 bg-gray-200 rounded animate-pulse" />
+                  <div className="h-6 w-20 bg-muted rounded animate-pulse" />
                 )}
               </div>
               <button
                 onClick={() => setBalanceVisible(!balanceVisible)}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-1 hover:bg-muted rounded-full transition-colors"
               >
                 {balanceVisible ? (
-                  <EyeOff className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+                  <EyeOff className="w-5 h-5 text-muted-foreground" strokeWidth={1.5} />
                 ) : (
-                  <Eye className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+                  <Eye className="w-5 h-5 text-muted-foreground" strokeWidth={1.5} />
                 )}
               </button>
             </div>
-            <div className="text-xs text-gray-600 mb-2 ml-2">
+            <div className="text-xs text-muted-foreground mb-2 ml-2">
               {balanceVisible ? (
                 `Available fuliza: ${formatBalance(0)}`
               ) : (
-                <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+                <div className="h-4 w-32 bg-muted rounded animate-pulse" />
               )}
             </div>
-            <button className="w-full py-1.5 mx-2 border border-green-500 text-green-600 font-medium rounded-lg hover:bg-green-50 transition-colors text-sm mt-auto">
+            <button className="w-full py-1.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-lg hover:bg-mpesa-green/10 transition-colors text-sm mt-auto">
               View Statements
             </button>
           </div>
 
           {/* My Balances Card */}
-          <div className="bg-white rounded-xl p-4 shrink-0 w-72 flex flex-col relative overflow-hidden">
+          <div className="bg-card rounded-xl p-4 shrink-0 w-72 flex flex-col relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-1.25 bg-linear-to-b from-green-500 to-blue-500 rounded-l-xl" />
-            <h3 className="text-sm font-medium text-green-600 mb-2 ml-2">My Balances</h3>
+            <h3 className="text-sm font-medium text-mpesa-green mb-2 ml-2">My Balances</h3>
             <div className="flex justify-between items-center mb-2">
               <div className="flex flex-col items-start flex-1 ml-2">
-                <div className="text-xs font-medium text-gray-900 mb-0.5">Airtime</div>
-                <div className="text-lg font-semibold text-gray-900">KSh. 0.00</div>
+                <div className="text-xs font-medium text-foreground mb-0.5">Airtime</div>
+                <div className="text-lg font-semibold text-foreground">KSh. 0.00</div>
               </div>
-              <div className="h-8 w-px bg-gray-300 mx-4" />
+              <div className="h-8 w-px bg-border mx-4" />
               <div className="flex flex-col items-end flex-1 ml-4 mr-2 min-w-fit">
-                <div className="text-xs font-medium text-gray-900">Bonga</div>
-                <div className="text-lg font-semibold text-gray-900">0 <span className="text-xs font-semibold text-gray-900">Points</span></div>
+                <div className="text-xs font-medium text-foreground">Bonga</div>
+                <div className="text-lg font-semibold text-foreground">0 <span className="text-xs font-semibold text-foreground">Points</span></div>
               </div>
             </div>
-            <button className="w-full py-1.5 mx-2 border border-green-500 text-green-600 font-medium rounded-lg hover:bg-green-50 transition-colors text-sm mt-auto">
+            <button className="w-full py-1.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-lg hover:bg-mpesa-green/10 transition-colors text-sm mt-auto">
               View All Balances
             </button>
           </div>
@@ -432,8 +482,8 @@ export default function DashboardPage() {
               }}
               className={`h-1 rounded-full transition-all ${
                 index === currentCard
-                  ? "bg-green-500 w-6"
-                  : "bg-gray-300 w-2 hover:bg-gray-400"
+                  ? "bg-mpesa-green w-6"
+                  : "bg-muted w-2 hover:bg-muted-foreground/50"
               }`}
             />
           ))}
@@ -441,10 +491,10 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white mx-4 mt-2 rounded-md p-3 shrink-0">
+      <div className="bg-card mx-4 mt-2 rounded-md p-3 shrink-0">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">Quick Actions</h3>
-          <button className="text-sm text-green-600 font-medium flex items-center gap-1">
+          <h3 className="font-semibold text-foreground">Quick Actions</h3>
+          <button className="text-sm text-mpesa-green font-medium flex items-center gap-1">
             View All <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -456,7 +506,7 @@ export default function DashboardPage() {
                 key={index}
                 className="flex flex-col items-center gap-2 p-2 rounded-lg"
               >
-                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center relative">
+                <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center relative">
                   {action.image ? (
                     <img src={action.image} alt={action.label} className="w-5 h-5 object-contain" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}} />
                   ) : action.icon === PataMoreIcon ? (
@@ -466,7 +516,7 @@ export default function DashboardPage() {
                   ) : action.icon === HomeInternetIcon ? (
                     <HomeInternetIcon className="w-5 h-5" />
                   ) : (
-                    <Icon className="w-5 h-5 text-green-600" />
+                    <Icon className="w-5 h-5 text-mpesa-green" />
                   )}
                   {/* Red corner marker for Airtime Top up */}
                   {action.hasCornerMarker && (
@@ -486,7 +536,7 @@ export default function DashboardPage() {
                     </svg>
                   )}
                 </div>
-                <span className="text-xs text-center text-gray-700 font-medium">{action.label}</span>
+                <span className="text-xs text-center text-foreground font-medium">{action.label}</span>
               </button>
             );
           })}
@@ -494,15 +544,15 @@ export default function DashboardPage() {
       </div>
 
       {/* Frequent Transactions */}
-      <div className="bg-white mx-4 mt-2 rounded-md p-3 shrink-0">
+      <div className="bg-card mx-4 mt-2 rounded-md p-3 shrink-0">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">Frequent</h3>
+          <h3 className="font-semibold text-foreground">Frequent</h3>
           <button
             onClick={() => setShowFrequentDropdown(!showFrequentDropdown)}
-            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-1 hover:bg-muted rounded-full transition-colors"
           >
             <ChevronDown
-              className={`w-5 h-5 text-gray-600 transition-transform ${
+              className={`w-5 h-5 text-muted-foreground transition-transform ${
                 showFrequentDropdown ? "rotate-180" : ""
               }`}
             />
@@ -513,15 +563,15 @@ export default function DashboardPage() {
         {showFrequentDropdown && (
           <div className="mt-3">
             {/* Tabs */}
-            <div className="bg-slate-100 rounded-2xl flex mb-4">
+            <div className="bg-muted rounded-2xl flex mb-4">
               {["Apps", "Send", "Pay", "Bundles"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`flex-1 px-4 py-1 text-sm font-medium rounded-xl transition-colors ${
                     activeTab === tab
-                      ? "bg-green-500 text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
+                      ? "bg-mpesa-green text-card-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground hover:bg-card/50"
                   }`}
                 >
                   {tab}
@@ -532,22 +582,22 @@ export default function DashboardPage() {
             {/* Tab Content */}
             <div className="py-4">
               {activeTab === "Apps" && (
-                <div className="text-center text-gray-500 text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                   No apps added yet
                 </div>
               )}
               {activeTab === "Send" && (
-                <div className="text-center text-gray-500 text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                   No frequent contacts for sending
                 </div>
               )}
               {activeTab === "Pay" && (
-                <div className="text-center text-gray-500 text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                   No frequent payees
                 </div>
               )}
               {activeTab === "Bundles" && (
-                <div className="text-center text-gray-500 text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                   No frequent bundle purchases
                 </div>
               )}
@@ -559,7 +609,7 @@ export default function DashboardPage() {
       {/* Monthly Spending Summary */}
       <div className="mx-4 mt-2 mb-4">
         <div className="flex items-center mb-3">
-          <h3 className="text-sm font-semibold text-gray-900">Explore & Discover Deals 🔥</h3>
+          <h3 className="text-sm font-semibold text-foreground">Explore & Discover Deals 🔥</h3>
         </div>
         <div className="relative h-40 rounded-lg overflow-hidden">
           <div
@@ -606,33 +656,103 @@ export default function DashboardPage() {
       </div>
 
       {/* My Finances */}
-      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-5">
+      <div className="bg-card mx-4 mt-2 mb-4 rounded-md p-5">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">My Finances</h3>
-          <button className="text-sm text-green-600 font-medium flex items-center gap-1">
+          <h3 className="font-semibold text-foreground">My Finances</h3>
+          <button className="text-sm text-mpesa-green font-medium flex items-center gap-1">
             View All <ChevronRight className="w-4 h-4" />
           </button>
         </div>
-        <div className="flex justify-start">
-          <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
-            <div className="w-14 h-14 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
-              <img
-                src="/assets/ziidi-trader.png"
-                alt="Ziidi Trader"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <span className="text-xs text-center text-gray-700 font-medium">Ziidi Trader</span>
-          </button>
+        <div className="overflow-x-auto pb-2" style={{ maxWidth: '320px' }}>
+          <div className="flex justify-start" style={{ width: 'max-content', gap: '0px' }}>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <img
+                  src="/assets/ziidi-trader.png"
+                  alt="Ziidi Trader"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>Ziidi</span>
+                <br />
+                <span>trader</span>
+              </div>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <TuunzaMapataIcon className="w-10 h-10" />
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>Tuunza</span>
+                <br />
+                <span>Mapata</span>
+              </div>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                  <img
+                    src="/assets/shiriki-pay.png"
+                    alt="Shiriki Pay"
+                    className="w-6 h-6 object-contain"
+                  />
+                </div>
+              </div>
+              <span className="text-xs text-center text-gray-700 font-medium">Shiriki Pay</span>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-gray-300/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <img
+                  src="/assets/Mpesa-ratiba.png"
+                  alt="M-pesa Ratiba"
+                  className="w-10 h-10 object-contain"
+                />
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>M-pesa</span>
+                <br />
+                <span>Ratiba</span>
+              </div>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-orange-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <img
+                  src="/assets/mpesa-go.png"
+                  alt="Mpesa Go"
+                  className="w-9 h-9 object-contain"
+                />
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>Mpesa</span>
+                <br />
+                <span>Go</span>
+              </div>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                  <img
+                    src="/assets/M-Shwari.jpg"
+                    alt="M-Shwari"
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>M-Shwari</span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Entertainment */}
-      <div className="bg-white mx-4 mt-2 mb-4 rounded-md p-3">
+      <div className="bg-card mx-4 mt-2 mb-4 rounded-md p-3">
         <div className="flex items-center justify-start mb-3">
-          <h3 className="font-semibold text-gray-900">Entertainment</h3>
+          <h3 className="font-semibold text-foreground">Entertainment</h3>
         </div>
-        <div className="flex justify-start">
+        <div className="flex justify-start gap-4">
           <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
             <div className="w-14 h-14 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
@@ -643,12 +763,22 @@ export default function DashboardPage() {
             </div>
             <span className="text-xs text-center text-gray-700 font-medium">Baze</span>
           </button>
+          <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
+            <div className="w-14 h-14 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+              <img
+                src="/assets/skiza.png"
+                alt="Skiza"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="text-xs text-center text-gray-700 font-medium">Skiza</span>
+          </button>
         </div>
       </div>
       </div>
 
       {/* Floating Avatar on Bottom Right */}
-      <div className="fixed bottom-24 right-4 w-16 h-16 bg-white rounded-lg shadow-lg flex items-center justify-center border-2 border-gray-200 z-50">
+      <div className="fixed bottom-24 right-4 w-16 h-16 bg-card rounded-lg shadow-lg flex items-center justify-center border-2 border-border z-50">
         <img
           src="/assets/zuri-avatar.png"
           alt="Zuri Avatar"
@@ -658,9 +788,9 @@ export default function DashboardPage() {
 
       {/* Floating QR Code below Avatar */}
       <div
-        className={`fixed bottom-6 right-4 bg-white rounded-lg shadow-lg border-2 border-gray-200 z-50 flex items-center transition-all duration-300 ease-in-out ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
+        className={`fixed bottom-6 right-4 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
       >
-        <div className={`w-10 h-10 bg-gray-100 rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
+        <div className={`w-10 h-10 bg-muted rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
           {/* Top-left corner marker outside QR code */}
           <svg
             viewBox="0 0 24 24"
@@ -746,7 +876,7 @@ export default function DashboardPage() {
           </svg>
         </div>
         <div className={`flex flex-col flex-1 mr-4 ml-10 text-center ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>
-          <span className="text-sm font-semibold text-gray-900">Scan to Pay</span>
+          <span className="text-sm font-semibold text-foreground">Scan to Pay</span>
         </div>
       </div>
     </div>
