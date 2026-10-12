@@ -216,6 +216,7 @@ export default function DashboardPage() {
   const { user, isAuthenticated, logout } = useAuth();
   const router = useRouter();
   const [balanceVisible, setBalanceVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [showFrequentDropdown, setShowFrequentDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState("Apps");
@@ -239,6 +240,20 @@ export default function DashboardPage() {
       router.push("/login");
     }
   }, [isAuthenticated, user, router]);
+
+  useEffect(() => {
+    setMounted(true);
+    const storedBalanceVisible = localStorage.getItem("balanceVisible");
+    if (storedBalanceVisible) {
+      setBalanceVisible(storedBalanceVisible === "true");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem("balanceVisible", balanceVisible.toString());
+    }
+  }, [balanceVisible, mounted]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -419,7 +434,7 @@ export default function DashboardPage() {
                 {balanceVisible ? (
                   formatBalance(0)
                 ) : (
-                  <div className="h-6 w-20 bg-muted rounded animate-pulse" />
+                  <div className="h-6 w-32 bg-muted rounded animate-pulse" />
                 )}
               </div>
               <button
@@ -436,9 +451,7 @@ export default function DashboardPage() {
             <div className="text-xs text-muted-foreground mb-2 ml-2">
               {balanceVisible ? (
                 `Available fuliza: ${formatBalance(0)}`
-              ) : (
-                <div className="h-4 w-32 bg-muted rounded animate-pulse" />
-              )}
+              ) : null}
             </div>
             <button className="w-full py-1.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-lg hover:bg-mpesa-green/10 transition-colors text-sm mt-auto">
               View Statements

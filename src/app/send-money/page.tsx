@@ -13,6 +13,8 @@ export default function SendMoneyPage() {
   const [amount, setAmount] = useState("0");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("mpesa");
   const [pochiMerchant, setPochiMerchant] = useState("");
+  const [balanceVisible, setBalanceVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -20,9 +22,22 @@ export default function SendMoneyPage() {
     }
   }, [isAuthenticated, user, router]);
 
+  useEffect(() => {
+    setMounted(true);
+    const storedBalanceVisible = localStorage.getItem("balanceVisible");
+    if (storedBalanceVisible) {
+      setBalanceVisible(storedBalanceVisible === "true");
+    }
+  }, []);
+
   if (!isAuthenticated || !user) {
     return null;
   }
+
+  const formatBalance = (amount: number | undefined) => {
+    if (amount === undefined || amount === null) return "KSh 0.00";
+    return `KSh ${amount.toLocaleString("en-KE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
 
   const handleContinue = () => {
     if (activeTab === "mobile" && phoneNumber && amount) {
@@ -218,8 +233,16 @@ export default function SendMoneyPage() {
               </div>
 
               {/* Balance Information */}
-              <div className="text-xs text-muted-foreground">
-                Balance: Ksh 0.00 - Fuliza: Ksh 83.99
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                {balanceVisible ? (
+                  <>
+                    <span>Balance: {formatBalance(0)}</span>
+                    <span>-</span>
+                    <span>Fuliza: {formatBalance(83.99)}</span>
+                  </>
+                ) : (
+                  <div className="h-4 w-40 bg-muted rounded animate-pulse" />
+                )}
               </div>
             </div>
           </>
@@ -278,8 +301,16 @@ export default function SendMoneyPage() {
               </div>
 
               {/* Balance Information */}
-              <div className="text-xs text-muted-foreground">
-                Balance: Ksh 0.00 - Fuliza: Ksh 83.99
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                {balanceVisible ? (
+                  <>
+                    <span>Balance: {formatBalance(0)}</span>
+                    <span>-</span>
+                    <span>Fuliza: {formatBalance(83.99)}</span>
+                  </>
+                ) : (
+                  <div className="h-4 w-40 bg-muted rounded animate-pulse" />
+                )}
               </div>
             </div>
           </>
@@ -309,7 +340,9 @@ export default function SendMoneyPage() {
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-sm text-foreground">M-PESA</div>
-                  <div className="text-xs text-muted-foreground">Bal. Ksh. 0.0</div>
+                  <div className="text-xs text-muted-foreground">
+                    {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-3 w-16 bg-muted rounded animate-pulse" />}
+                  </div>
                 </div>
               </div>
             </button>
@@ -357,7 +390,9 @@ export default function SendMoneyPage() {
                   {selectedPaymentMethod === "shiriki" ? (
                     <div className={`text-xs ${
                       selectedPaymentMethod === "shiriki" ? "text-white/90" : "text-muted-foreground"
-                    }`}>Bal. Ksh. 0.0</div>
+                    }`}>
+                      {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-3 w-16 bg-muted rounded animate-pulse" />}
+                    </div>
                   ) : (
                     <span className="text-sm text-muted-foreground">Select</span>
                   )}
