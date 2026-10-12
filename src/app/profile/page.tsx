@@ -173,14 +173,17 @@ export default function ProfilePage() {
           </button>
 
           {/* Card 2 */}
-          <div className="flex-1 bg-card rounded-xl p-4 shadow-sm flex flex-col items-start justify-start">
+          <button
+            onClick={() => router.push("/biometric")}
+            className="flex-1 bg-card rounded-xl p-4 shadow-sm flex flex-col items-start justify-start"
+          >
             <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2 relative">
               <div className="w-6 h-6 border-2 border-mpesa-green rounded-full flex items-center justify-center">
                 <Fingerprint className="w-4 h-4 text-mpesa-red" />
               </div>
             </div>
             <span className="text-xs text-muted-foreground whitespace-nowrap">Biometric</span>
-          </div>
+          </button>
         </div>
 
         {/* Menu Sections */}
@@ -219,7 +222,7 @@ export default function ProfilePage() {
                               <line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--mpesa-red)" strokeWidth="2" strokeLinecap="round"/>
                             </svg>
                           ) : (
-                            <Icon className="w-5 h-5 text-green-600" strokeWidth={1.5} />
+                            <Icon className="w-5 h-5 text-mpesa-green" strokeWidth={1.5} />
                           )}
                         </div>
                         <span className="text-xs text-muted-foreground whitespace-nowrap">{item.label}</span>
@@ -231,8 +234,8 @@ export default function ProfilePage() {
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="9" stroke="var(--mpesa-green)" strokeWidth="2" fill="none"/>
-                        <path d="M12 3L12 12L20.5 16" stroke="var(--mpesa-red)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="12" cy="12" r="9" stroke="var(--mpesa-green)" strokeWidth="1.5" fill="none"/>
+                        <path d="M12 3L12 12L20.5 16" stroke="var(--mpesa-red)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">Check My usage</span>
@@ -311,7 +314,7 @@ export default function ProfilePage() {
                             <line x1="15.5" y1="17" x2="8.5" y2="14" stroke="var(--mpesa-green)" strokeWidth="2" strokeLinecap="round"/>
                           </svg>
                         ) : (
-                          <Icon className="w-5 h-5 text-green-600" strokeWidth={1.5} />
+                          <Icon className="w-5 h-5 text-mpesa-green" strokeWidth={1.5} />
                         )}
                       </div>
                       {item.label === "Recommend A Friend" ? (

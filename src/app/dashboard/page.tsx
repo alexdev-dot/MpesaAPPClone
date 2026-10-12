@@ -314,14 +314,14 @@ export default function DashboardPage() {
     image?: string;
     hasCornerMarker?: boolean;
   }> = [
-    { icon: Send, label: "Send Money", color: "bg-green-500", image: "/assets/icons/send.png" },
-    { icon: ShoppingBasketIcon, label: "Lipa na M-PESA", color: "bg-green-500" },
-    { icon: Wallet, label: "Withdraw Money", color: "bg-green-500" },
-    { icon: PataMoreIcon, label: "Buy Bundles", color: "bg-green-500" },
-    { icon: ArrowUpRight, label: "International Transfer", color: "bg-green-500", image: "/assets/icons/earth-grid-symbol.png" },
-    { icon: MessageSquare, label: "Airtime Top up", color: "bg-green-500", image: "/assets/icons/phone-call.png", hasCornerMarker: true },
-    { icon: Star, label: "Tunukiwa Bundles", color: "bg-green-500", image: "/assets/icons/bundle-gift.png" },
-    { icon: HomeInternetIcon, label: "Home Internet", color: "bg-green-500" },
+    { icon: Send, label: "Send Money", color: "bg-mpesa-green", image: "/assets/icons/send.png" },
+    { icon: ShoppingBasketIcon, label: "Lipa na M-PESA", color: "bg-mpesa-green" },
+    { icon: Wallet, label: "Withdraw Money", color: "bg-mpesa-green" },
+    { icon: PataMoreIcon, label: "Buy Bundles", color: "bg-mpesa-green" },
+    { icon: ArrowUpRight, label: "International Transfer", color: "bg-mpesa-green", image: "/assets/icons/earth-grid-symbol.png" },
+    { icon: MessageSquare, label: "Airtime Top up", color: "bg-mpesa-green", image: "/assets/icons/phone-call.png", hasCornerMarker: true },
+    { icon: Star, label: "Tunukiwa Bundles", color: "bg-mpesa-green", image: "/assets/icons/bundle-gift.png" },
+    { icon: HomeInternetIcon, label: "Home Internet", color: "bg-mpesa-green" },
   ];
 
   const frequentTransactions = [
@@ -383,16 +383,16 @@ export default function DashboardPage() {
         <div className="ml-auto flex items-center gap-4">
           <button className="relative w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" className="text-green-600" />
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" className="text-green-600" />
-              <line x1="12" y1="8" x2="12" y2="14" className="text-red-500" strokeWidth="1.5" />
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" className="text-mpesa-green" />
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" className="text-mpesa-green" />
+              <line x1="12" y1="8" x2="12" y2="14" className="text-mpesa-red" strokeWidth="1.5" />
             </svg>
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-background"></span>
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-mpesa-red rounded-full border-2 border-background"></span>
           </button>
           <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" className="text-green-600" />
-              <path d="m21 21-4.35-4.35" className="text-red-500" />
+              <circle cx="11" cy="11" r="8" className="text-mpesa-green" />
+              <path d="m21 21-4.35-4.35" className="text-mpesa-red" />
             </svg>
           </button>
         </div>
@@ -504,13 +504,18 @@ export default function DashboardPage() {
             return (
               <button
                 key={index}
+                onClick={() => {
+                  if (action.label === "Send Money") {
+                    router.push("/send-money");
+                  }
+                }}
                 className="flex flex-col items-center gap-2 p-2 rounded-lg"
               >
                 <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center relative">
                   {action.image ? (
                     <img src={action.image} alt={action.label} className="w-5 h-5 object-contain" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}} />
                   ) : action.icon === PataMoreIcon ? (
-                    <PataMoreIcon className="w-9 h-9 text-green-600" />
+                    <PataMoreIcon className="w-9 h-9" />
                   ) : action.icon === ShoppingBasketIcon ? (
                     <ShoppingBasketIcon className="w-5 h-5" />
                   ) : action.icon === HomeInternetIcon ? (
@@ -681,6 +686,21 @@ export default function DashboardPage() {
             </button>
             <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
               <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                  <img
+                    src="/assets/ziidi.png"
+                    alt="Ziiidi"
+                    className="w-8 h-8 object-contain"
+                    style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}}
+                  />
+                </div>
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>Ziiidi</span>
+              </div>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <TuunzaMapataIcon className="w-10 h-10" />
               </div>
               <div className="text-xs text-center text-foreground font-medium">
@@ -778,19 +798,21 @@ export default function DashboardPage() {
       </div>
 
       {/* Floating Avatar on Bottom Right */}
-      <div className="fixed bottom-24 right-4 w-16 h-16 bg-card rounded-lg shadow-lg flex items-center justify-center border-2 border-border z-50">
-        <img
-          src="/assets/zuri-avatar.png"
-          alt="Zuri Avatar"
-          className="w-14 h-14 rounded-lg object-cover"
-        />
+      <div className="fixed bottom-24 right-4 w-16 h-16 bg-card rounded-xl shadow-lg flex items-center justify-center border-2 border-border z-50">
+        <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
+          <img
+            src="/assets/zuri-avatar.png"
+            alt="Zuri Avatar"
+            className="w-12 h-12 rounded-full object-cover"
+          />
+        </div>
       </div>
 
       {/* Floating QR Code below Avatar */}
       <div
         className={`fixed bottom-6 right-4 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
       >
-        <div className={`w-10 h-10 bg-muted rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
+        <div className={`w-10 h-10 bg-card rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
           {/* Top-left corner marker outside QR code */}
           <svg
             viewBox="0 0 24 24"
@@ -851,13 +873,13 @@ export default function DashboardPage() {
               strokeLinejoin="round"
             />
           </svg>
-          <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+          <svg className="w-8 h-8 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
             <rect x="2" y="2" width="6" height="6" rx="1" />
-            <rect x="4" y="4" width="2" height="2" fill="white" />
+            <rect x="4" y="4" width="2" height="2" fill="currentColor" />
             <rect x="16" y="2" width="6" height="6" rx="1" />
-            <rect x="18" y="4" width="2" height="2" fill="white" />
+            <rect x="18" y="4" width="2" height="2" fill="currentColor" />
             <rect x="2" y="16" width="6" height="6" rx="1" />
-            <rect x="4" y="18" width="2" height="2" fill="white" />
+            <rect x="4" y="18" width="2" height="2" fill="currentColor" />
             <rect x="10" y="2" width="2" height="2" />
             <rect x="12" y="4" width="2" height="2" />
             <rect x="14" y="6" width="2" height="2" />

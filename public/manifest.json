@@ -6,7 +6,7 @@
   "display": "standalone",
   "display_override": ["standalone", "fullscreen"],
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "theme_color": "#3aa335",
   "orientation": "portrait",
   "scope": "/",
   "icons": [
