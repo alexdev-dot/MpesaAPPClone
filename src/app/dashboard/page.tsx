@@ -465,7 +465,7 @@ export default function DashboardPage() {
                 `Available fuliza: ${formatBalance(0)}`
               ) : null}
             </div>
-            <button className="w-full py-1 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-lg hover:bg-mpesa-green/10 transition-colors text-xs mt-auto">
+            <button className="w-full py-0.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[9px] mt-auto">
               View Statements
             </button>
           </div>
@@ -485,7 +485,7 @@ export default function DashboardPage() {
                 <div className="text-base font-semibold text-foreground">0 <span className="text-[10px] font-semibold text-foreground">Points</span></div>
               </div>
             </div>
-            <button className="w-full py-1 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-lg hover:bg-mpesa-green/10 transition-colors text-xs mt-auto">
+            <button className="w-full py-0.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[9px] mt-auto">
               View All Balances
             </button>
           </div>

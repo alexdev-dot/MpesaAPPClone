@@ -110,6 +110,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           rp: {
             name: "M-PESA Clone",
             id: window.location.hostname,
+            icon: `${window.location.origin}/favicon-96x96.png`,
           },
           user: {
             id: userId,
@@ -139,7 +140,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       return false;
     } catch (error) {
-      console.error("Biometric registration failed:", error);
+      // Silently handle user cancellation or errors
       return false;
     }
   };
@@ -198,7 +199,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       return false;
     } catch (error) {
-      console.error("Biometric authentication failed:", error);
+      // Silently handle user cancellation or errors
       return false;
     }
   };

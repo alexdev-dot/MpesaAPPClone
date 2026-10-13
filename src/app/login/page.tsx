@@ -29,11 +29,9 @@ export default function LoginPage() {
         // First time - register biometric
         const registered = await registerBiometric();
         if (registered) {
-          setError("Biometric registered! Try again to login.");
           setIsValidating(false);
           return;
         } else {
-          setError("Biometric registration failed. Use PIN to login.");
           setIsValidating(false);
           return;
         }
@@ -46,12 +44,10 @@ export default function LoginPage() {
         setIsValidating(false);
         setPin("");
       } else {
-        setError("Authentication failed. Use PIN to login.");
         setIsValidating(false);
       }
     } catch (err) {
-      // User cancelled or biometric not available
-      setError("Use PIN to login");
+      // User cancelled or biometric not available - silently allow PIN login
       setIsValidating(false);
     }
   };
