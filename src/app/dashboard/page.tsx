@@ -226,6 +226,7 @@ export default function DashboardPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalCards = 2;
   const [isQRCodeCollapsed, setIsQRCodeCollapsed] = useState(false);
+  const [showHelpCard, setShowHelpCard] = useState(false);
 
   // Get dynamic greeting based on time
   const getGreeting = () => {
@@ -247,6 +248,17 @@ export default function DashboardPage() {
     if (storedBalanceVisible) {
       setBalanceVisible(storedBalanceVisible === "true");
     }
+  }, []);
+
+  // Show help card for 3 seconds when user enters dashboard
+  useEffect(() => {
+    console.log('Showing help card');
+    setShowHelpCard(true);
+    const timer = setTimeout(() => {
+      console.log('Hiding help card');
+      setShowHelpCard(false);
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -329,13 +341,13 @@ export default function DashboardPage() {
     image?: string;
     hasCornerMarker?: boolean;
   }> = [
-    { icon: Send, label: "Send Money", color: "bg-mpesa-green", image: "/assets/icons/send.png" },
+    { icon: Send, label: "Send Money", color: "bg-mpesa-green", image: "/assets/icons/common/send.png" },
     { icon: ShoppingBasketIcon, label: "Lipa na M-PESA", color: "bg-mpesa-green" },
     { icon: Wallet, label: "Withdraw Money", color: "bg-mpesa-green" },
     { icon: PataMoreIcon, label: "Buy Bundles", color: "bg-mpesa-green" },
-    { icon: ArrowUpRight, label: "International Transfer", color: "bg-mpesa-green", image: "/assets/icons/earth-grid-symbol.png" },
-    { icon: MessageSquare, label: "Airtime Top up", color: "bg-mpesa-green", image: "/assets/icons/phone-call.png", hasCornerMarker: true },
-    { icon: Star, label: "Tunukiwa Bundles", color: "bg-mpesa-green", image: "/assets/icons/bundle-gift.png" },
+    { icon: ArrowUpRight, label: "International Transfer", color: "bg-mpesa-green", image: "/assets/icons/dashboard/earth-grid-symbol.png" },
+    { icon: MessageSquare, label: "Airtime Top up", color: "bg-mpesa-green", image: "/assets/icons/dashboard/phone-call.png", hasCornerMarker: true },
+    { icon: Star, label: "Tunukiwa Bundles", color: "bg-mpesa-green", image: "/assets/icons/dashboard/bundle-gift.png" },
     { icon: HomeInternetIcon, label: "Home Internet", color: "bg-mpesa-green" },
   ];
 
@@ -373,7 +385,7 @@ export default function DashboardPage() {
           >
             <div className="w-10 h-10 rounded-full overflow-hidden">
               <img
-                src="/assets/profile image.jpeg"
+                src="/assets/avatars/profile-default.jpeg"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -520,6 +532,8 @@ export default function DashboardPage() {
                 onClick={() => {
                   if (action.label === "Send Money") {
                     router.push("/send-money");
+                  } else if (action.label === "Lipa na M-PESA") {
+                    router.push("/lipa-na-mpesa");
                   }
                 }}
                 className="flex flex-col items-center gap-2 p-2 rounded-lg"
@@ -635,7 +649,7 @@ export default function DashboardPage() {
             style={{ opacity: currentSlide === 0 ? 1 : 0 }}
           >
             <img
-              src="/assets/banner/slide1.png"
+              src="/assets/banners/slide1.png"
               alt="Deal 1"
               className="w-full h-full object-cover"
             />
@@ -645,7 +659,7 @@ export default function DashboardPage() {
             style={{ opacity: currentSlide === 1 ? 1 : 0 }}
           >
             <img
-              src="/assets/banner/slide2.jpg"
+              src="/assets/banners/slide2.jpg"
               alt="Deal 2"
               className="w-full h-full object-cover"
             />
@@ -655,7 +669,7 @@ export default function DashboardPage() {
             style={{ opacity: currentSlide === 2 ? 1 : 0 }}
           >
             <img
-              src="/assets/banner/slide3.jpg"
+              src="/assets/banners/slide3.jpg"
               alt="Deal 3"
               className="w-full h-full object-cover"
             />
@@ -665,7 +679,7 @@ export default function DashboardPage() {
             style={{ opacity: currentSlide === 3 ? 1 : 0 }}
           >
             <img
-              src="/assets/banner/slide4.jpg"
+              src="/assets/banners/slide4.jpg"
               alt="Deal 4"
               className="w-full h-full object-cover"
             />
@@ -686,7 +700,7 @@ export default function DashboardPage() {
             <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
               <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
-                  src="/assets/ziidi-trader.png"
+                  src="/assets/services/ziidi-trader.png"
                   alt="Ziidi Trader"
                   className="w-full h-full object-contain"
                 />
@@ -701,7 +715,7 @@ export default function DashboardPage() {
               <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <img
-                    src="/assets/ziidi.png"
+                    src="/assets/services/ziidi.png"
                     alt="Ziiidi"
                     className="w-8 h-8 object-contain"
                     style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}}
@@ -726,18 +740,32 @@ export default function DashboardPage() {
               <div className="w-12 h-12 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <img
-                    src="/assets/shiriki-pay.png"
+                    src="/assets/brands/shiriki-pay.png"
                     alt="Shiriki Pay"
                     className="w-6 h-6 object-contain"
                   />
                 </div>
               </div>
-              <span className="text-xs text-center text-gray-700 font-medium">Shiriki Pay</span>
+              <span className="text-xs text-center text-foreground font-medium">Shiriki Pay</span>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
+              <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--mpesa-green)' }}>
+                  <img
+                    src="/assets/icons/common/Mali.png"
+                    alt="Mali"
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+              </div>
+              <div className="text-xs text-center text-foreground font-medium">
+                <span>Mali</span>
+              </div>
             </button>
             <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
               <div className="w-12 h-12 bg-gray-300/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
-                  src="/assets/Mpesa-ratiba.png"
+                  src="/assets/services/Mpesa-ratiba.png"
                   alt="M-pesa Ratiba"
                   className="w-10 h-10 object-contain"
                 />
@@ -751,7 +779,7 @@ export default function DashboardPage() {
             <button className="flex flex-col items-center gap-2 p-2 rounded-lg shrink-0">
               <div className="w-12 h-12 bg-orange-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
-                  src="/assets/mpesa-go.png"
+                  src="/assets/services/mpesa-GO.png"
                   alt="Mpesa Go"
                   className="w-9 h-9 object-contain"
                 />
@@ -766,7 +794,7 @@ export default function DashboardPage() {
               <div className="w-12 h-12 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <img
-                    src="/assets/M-Shwari.jpg"
+                    src="/assets/services/M-Shwari.jpg"
                     alt="M-Shwari"
                     className="w-8 h-8 object-contain"
                   />
@@ -789,41 +817,56 @@ export default function DashboardPage() {
           <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
             <div className="w-14 h-14 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
-                src="/assets/baze.png"
+                src="/assets/services/baze.png"
                 alt="Baze"
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="text-xs text-center text-gray-700 font-medium">Baze</span>
+            <span className="text-xs text-center text-foreground font-medium">Baze</span>
           </button>
           <button className="flex flex-col items-center gap-2 p-2 rounded-lg">
             <div className="w-14 h-14 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
-                src="/assets/skiza.png"
+                src="/assets/services/skiza.png"
                 alt="Skiza"
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="text-xs text-center text-gray-700 font-medium">Skiza</span>
+            <span className="text-xs text-center text-foreground font-medium">Skiza</span>
           </button>
         </div>
       </div>
       </div>
 
+      {/* Floating Help Card - Bouncing Animation */}
+      {showHelpCard && (
+        <button
+          onClick={() => router.push("/chat-zuri")}
+          className="fixed bottom-28 right-24 message-card px-3 py-1.5 rounded-md shadow-md z-50 animate-bounce-smooth border max-w-36 flex items-center hover:opacity-80 transition-opacity"
+        >
+          <span className="text-[11px] font-medium">Need help? Talk to zuri</span>
+          <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[5px] message-card-pointer"></div>
+        </button>
+      )}
+
       {/* Floating Avatar on Bottom Right */}
-      <div className="fixed bottom-24 right-4 w-16 h-16 bg-card rounded-xl shadow-lg flex items-center justify-center border-2 border-border z-50">
+      <button
+        onClick={() => router.push("/chat-zuri")}
+        className="fixed bottom-24 right-4 w-16 h-16 bg-card rounded-xl shadow-lg flex items-center justify-center border-2 border-border z-50 hover:bg-muted transition-colors"
+      >
         <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center">
           <img
-            src="/assets/zuri-avatar.png"
+            src="/assets/avatars/zuri-avatar.png"
             alt="Zuri Avatar"
             className="w-12 h-12 rounded-full object-cover"
           />
         </div>
-      </div>
+      </button>
 
       {/* Floating QR Code below Avatar */}
-      <div
-        className={`fixed bottom-6 right-4 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
+      <button
+        onClick={() => router.push("/chat-zuri")}
+        className={`fixed bottom-6 right-4 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out hover:bg-muted ${isQRCodeCollapsed ? 'w-16 h-16 p-0 justify-center' : 'w-52 p-2 justify-between'}`}
       >
         <div className={`w-10 h-10 bg-card rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
           {/* Top-left corner marker outside QR code */}
@@ -913,7 +956,7 @@ export default function DashboardPage() {
         <div className={`flex flex-col flex-1 mr-4 ml-10 text-center ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>
           <span className="text-sm font-semibold text-foreground">Scan to Pay</span>
         </div>
-      </div>
+      </button>
     </div>
   );
 }

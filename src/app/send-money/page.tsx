@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, QrCode, UserPlus, Smartphone, CreditCard, Send, Wallet, ArrowUpRight, Check, Store } from "lucide-react";
 
-export default function SendMoneyPage() {
+function SendMoneyPageContent() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("mobile");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("0");
@@ -21,6 +22,13 @@ export default function SendMoneyPage() {
       router.push("/login");
     }
   }, [isAuthenticated, user, router]);
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "pochi") {
+      setActiveTab("pochi");
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setMounted(true);
@@ -68,7 +76,7 @@ export default function SendMoneyPage() {
       <div className="flex-1 overflow-y-auto pb-4">
         {/* Navigation Tabs */}
         <div className="mx-4 mt-2">
-          <div className="bg-muted rounded-2xl flex p-1">
+          <div className="bg-muted rounded-2xl flex p-1 border border-border">
             <button
               onClick={() => setActiveTab("mobile")}
               className={`flex-1 px-4 py-2 text-sm font-medium rounded-2xl transition-colors ${
@@ -127,7 +135,7 @@ export default function SendMoneyPage() {
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
-                    <img src="/assets/icons/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
+                    <img src="/assets/icons/common/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
                     <div className="h-6 w-px bg-border"></div>
                     <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative">
                       {/* Top-left corner marker */}
@@ -190,7 +198,7 @@ export default function SendMoneyPage() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <svg className="w-5 h-5 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
+                      <svg className="w-7 h-7 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
                         <rect x="2" y="2" width="6" height="6" rx="1" />
                         <rect x="4" y="4" width="2" height="2" fill="white" />
                         <rect x="16" y="2" width="6" height="6" rx="1" />
@@ -281,7 +289,7 @@ export default function SendMoneyPage() {
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
-                    <img src="/assets/icons/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
+                    <img src="/assets/icons/common/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
                   </div>
                 </div>
               </div>
@@ -336,7 +344,7 @@ export default function SendMoneyPage() {
               )}
               <div className="flex flex-row items-center gap-2">
                 <div className="w-10 h-10 flex items-center justify-center">
-                  <img src="/assets/shiriki-pay.png" alt="M-PESA" className="w-7 h-7 rotate-20" />
+                  <img src="/assets/brands/shiriki-pay.png" alt="M-PESA" className="w-7 h-7 rotate-20" />
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-sm text-foreground">M-PESA</div>
@@ -369,14 +377,14 @@ export default function SendMoneyPage() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <circle cx="12" cy="12" r="10" fill="hsl(var(--muted))" />
+                    <circle cx="12" cy="12" r="10" fill="rgba(34, 197, 94, 0.2)" />
                     <text
                       x="12"
                       y="16"
                       textAnchor="middle"
                       fontSize="16"
                       fontWeight="bold"
-                      fill="#4CAF50"
+                      fill="#22c55e"
                       fontFamily="Arial, sans-serif"
                     >
                       S
@@ -423,7 +431,7 @@ export default function SendMoneyPage() {
             <h3 className="font-semibold text-sm text-foreground mb-2">Do More</h3>
             <div className="grid grid-cols-3 gap-3">
               <button className="bg-card rounded-xl p-4 flex flex-col items-center gap-2 hover:bg-muted transition-colors">
-                <img src="/assets/group.png" alt="Group" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
+                <img src="/assets/services/group.png" alt="Group" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
                 <span className="text-xs text-foreground text-center">Send to<br />Many</span>
               </button>
               <button className="bg-card rounded-xl p-4 flex flex-col items-center gap-2 hover:bg-muted transition-colors">
@@ -433,7 +441,7 @@ export default function SendMoneyPage() {
               <button className="bg-card rounded-xl p-4 flex flex-col items-center gap-2 hover:bg-muted transition-colors">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <img
-                    src="/assets/ziidi.png"
+                    src="/assets/services/ziidi.png"
                     alt="Ziiidi"
                     className="w-8 h-8 object-contain"
                     style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}}
@@ -446,5 +454,13 @@ export default function SendMoneyPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SendMoneyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>}>
+      <SendMoneyPageContent />
+    </Suspense>
   );
 }

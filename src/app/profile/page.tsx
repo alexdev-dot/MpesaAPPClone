@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { ChevronRight, ChevronLeft, Eye, EyeOff, Smartphone, Wallet, CreditCard, Shield, Bell, Copy, User, Phone, Mail, MapPin, Calendar, Check, Camera, Sun, Fingerprint, Info } from "lucide-react";
 import ThemeCard from "@/components/ThemeCard";
+import LogoutCard from "@/components/LogoutCard";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export default function ProfilePage() {
@@ -14,6 +15,7 @@ export default function ProfilePage() {
   const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [showThemeCard, setShowThemeCard] = useState(false);
+  const [showLogoutCard, setShowLogoutCard] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -106,7 +108,7 @@ export default function ProfilePage() {
             <div className="relative shrink-0">
               <div className="w-12 h-12 rounded-full overflow-hidden">
                 <img
-                  src="/assets/profile image.jpeg"
+                  src="/assets/avatars/profile-default.jpeg"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
@@ -212,9 +214,9 @@ export default function ProfilePage() {
                       >
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
                           {itemIndex === 0 ? (
-                            <img src="/assets/icons/shield.png" alt="Shield" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                            <img src="/assets/icons/common/shield.png" alt="Shield" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                           ) : itemIndex === 1 ? (
-                            <img src="/assets/icons/lock.png" alt="Lock" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                            <img src="/assets/icons/profile/lock.png" alt="Lock" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                           ) : itemIndex === 2 ? (
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="var(--mpesa-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -242,13 +244,13 @@ export default function ProfilePage() {
                   </button>
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
-                      <img src="/assets/icons/e-sim.png" alt="e-SIM" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                      <img src="/assets/icons/profile/e-sim.png" alt="e-SIM" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">Request e-SIM</span>
                   </button>
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
-                      <img src="/assets/icons/subscription.png" alt="Subscription" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                      <img src="/assets/icons/profile/subscription.png" alt="Subscription" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">My subscription</span>
                   </button>
@@ -256,20 +258,20 @@ export default function ProfilePage() {
                 <div className="flex gap-3 mx-4 mt-3">
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2 relative">
-                      <img src="/assets/icons/chat.png" alt="Chat" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                      <img src="/assets/icons/profile/chat.png" alt="Chat" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                       <span className="absolute text-red-500 text-[8px] font-bold inset-0 flex items-center justify-center">24</span>
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">Get help</span>
                   </button>
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
-                      <img src="/assets/icons/sim-card.png" alt="SIM card" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                      <img src="/assets/icons/profile/sim-card.png" alt="SIM card" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                     </div>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">Manage My Line</span>
                   </button>
                   <button className="flex-1 bg-card rounded-xl p-3 shadow-sm flex flex-col items-start justify-start">
                     <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center mb-2">
-                      <img src="/assets/icons/store.png" alt="Store" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
+                      <img src="/assets/icons/profile/store.png" alt="Store" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(34%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)' }} />
                     </div>
                     <div className="text-xs text-muted-foreground">Find a<br />Safaricom Shop</div>
                   </button>
@@ -333,10 +335,7 @@ export default function ProfilePage() {
         {/* Logout Link */}
         <div className="mx-4 mt-4">
           <button
-            onClick={() => {
-              logout();
-              router.push("/login");
-            }}
+            onClick={() => setShowLogoutCard(true)}
             className="text-sm text-mpesa-red hover:text-mpesa-red-dark underline"
           >
             Logout
@@ -353,6 +352,17 @@ export default function ProfilePage() {
       <ThemeCard
         isOpen={showThemeCard}
         onClose={() => setShowThemeCard(false)}
+      />
+
+      {/* Logout Card Component */}
+      <LogoutCard
+        isOpen={showLogoutCard}
+        onClose={() => setShowLogoutCard(false)}
+        onLogout={() => {
+          setShowLogoutCard(false);
+          logout();
+          router.push("/login");
+        }}
       />
     </div>
   );

@@ -68,7 +68,7 @@ export default function LoginPage() {
         {/* Profile Image */}
         <div className="w-14 h-14 rounded-full overflow-hidden mb-3 border-2 border-border">
           <img
-            src="/assets/profile image.jpeg"
+            src="/assets/avatars/profile-default.jpeg"
             alt="Profile"
             className="w-full h-full object-cover"
           />
@@ -85,12 +85,12 @@ export default function LoginPage() {
       <div className="px-6 py-2 shrink-0">
         <div className="flex items-center gap-2 px-3 py-2 rounded-lg border max-w-xs mx-auto" style={{ backgroundColor: 'rgba(58, 163, 53, 0.15)', borderColor: 'rgba(58, 163, 53, 0.25)' }}>
           <img
-            src="/assets/icons/info.png"
+            src="/assets/icons/common/info.png"
             alt="Info"
             className="w-4 h-4 shrink-0"
             style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(86deg) brightness(96%) contrast(97%)' }}
           />
-          <p className="text-xs text-black font-medium" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
+          <p className="text-xs text-foreground font-medium" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
             This app will not use any of your data bundles
           </p>
         </div>
@@ -127,12 +127,12 @@ export default function LoginPage() {
         {error && (
           <div className="flex items-center gap-2 px-3 py-2 rounded-lg border max-w-xs mx-auto mb-2" style={{ backgroundColor: 'rgba(58, 163, 53, 0.15)', borderColor: 'rgba(58, 163, 53, 0.25)' }}>
             <img
-              src="/assets/icons/info.png"
+              src="/assets/icons/common/info.png"
               alt="Info"
               className="w-4 h-4 shrink-0"
               style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(86deg) brightness(96%) contrast(97%)' }}
             />
-            <p className="text-xs text-mpesa-red font-medium" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
+            <p className="text-xs text-mpesa-red dark:text-white font-medium" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
               {error}
             </p>
           </div>

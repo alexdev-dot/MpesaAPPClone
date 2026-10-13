@@ -261,6 +261,89 @@
   animation: loading 1.5s ease-in-out infinite;
 }
 
+/* Custom bounce animation for help card */
+@keyframes bounce-smooth {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+.animate-bounce-smooth {
+  animation: bounce-smooth 2s ease-in-out infinite;
+}
+
+/* Message card theming */
+.message-card {
+  background-color: black !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+.dark .message-card {
+  background-color: white !important;
+  color: black !important;
+  border-color: black !important;
+}
+
+.message-card-pointer {
+  border-left-color: black !important;
+}
+
+.dark .message-card-pointer {
+  border-left-color: white !important;
+}
+
+/* Fade in animation for help card */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Message bubble pointer effect */
+.message-pointer-right {
+  position: relative;
+}
+
+.message-pointer-right::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid white;
+}
+
+.message-pointer-right::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #d1d5db;
+  z-index: -1;
+}
+
 /* Safaricom Typography Utilities */
 .text-display {
   font-size: var(--font-size-display);
