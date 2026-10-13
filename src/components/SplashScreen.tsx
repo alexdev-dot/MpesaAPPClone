@@ -41,7 +41,7 @@ export default function SplashScreen() {
       >
         {/* M-Pesa Logo Image - Centered */}
         <img
-          src="/assets/safaricom-mpesa.png"
+          src="/assets/brands/safaricom-mpesa.png"
           alt="M-PESA"
           className="w-64 h-64 object-contain"
         />

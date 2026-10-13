@@ -34,6 +34,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    // Don't auto-login - user must always enter PIN
+    // But load user data if it exists for balance updates etc
     const storedUser = localStorage.getItem("mpesa_user");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
@@ -45,7 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         fulizaLimit: parsedUser.fulizaLimit ?? 500,
       };
       setUser(migratedUser);
-      setIsAuthenticated(true);
+      // Don't set isAuthenticated to true - user must login
+      setIsAuthenticated(false);
     }
   }, []);
 
@@ -78,6 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem("mpesa_user");
+    // Don't remove has_seen_onboarding - user should skip onboarding on logout
   };
 
   const updateBalance = (amount: number) => {

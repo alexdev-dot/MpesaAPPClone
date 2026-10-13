@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Send, X } from "lucide-react";
@@ -17,7 +17,7 @@ export default function ChatZuriPage() {
       timestamp: null as Date | null,
     },
   ]);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -31,13 +31,7 @@ export default function ChatZuriPage() {
     );
   }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const handleSendMessage = () => {
     if (message.trim()) {
@@ -78,7 +72,7 @@ export default function ChatZuriPage() {
           scrollbar-width: none;
         }
       `}</style>
-      <div className="h-screen bg-background flex flex-col overflow-hidden">
+      <div className="h-dvh bg-background flex flex-col overflow-hidden">
       {/* Header */}
       <div className="bg-card px-4 py-3 flex items-center justify-center border-b border-border shrink-0">
         <button
@@ -122,7 +116,6 @@ export default function ChatZuriPage() {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}
@@ -159,6 +152,16 @@ export default function ChatZuriPage() {
             <Send className="w-5 h-5" strokeWidth={1.5} />
           </button>
         </div>
+      </div>
+
+      {/* Educational Disclaimer */}
+      <div className="px-6 pb-4 pt-2 shrink-0 border-t border-border mt-2">
+        <p className="text-center text-[11px] text-muted-foreground leading-tight font-medium">
+          Educational Clone Only — Not Affiliated with Safaricom
+        </p>
+        <p className="text-center text-[11px] text-muted-foreground leading-tight mt-1">
+          For training and demonstration purposes only.
+        </p>
       </div>
     </div>
     </>

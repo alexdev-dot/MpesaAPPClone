@@ -15,6 +15,9 @@ export default function LipaNaMpesaPage() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("mpesa");
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [merchantInputActive, setMerchantInputActive] = useState(false);
+  const [amountInputActive, setAmountInputActive] = useState(false);
+  const [accountInputActive, setAccountInputActive] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -65,9 +68,9 @@ export default function LipaNaMpesaPage() {
       </div>
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto pb-8">
+      <div className="flex-1 overflow-y-auto pb-2">
         {/* Navigation Tabs */}
-        <div className="mx-4 mt-4">
+        <div className="mx-4 mt-2">
           <div className="bg-muted rounded-2xl flex p-1 border border-border">
             <button
               onClick={() => setActiveTab("buy-goods")}
@@ -105,7 +108,7 @@ export default function LipaNaMpesaPage() {
         {activeTab === "buy-goods" ? (
           <>
             {/* Favourites Section */}
-            <div className="mx-4 mt-6">
+            <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-foreground">Favourites</h3>
                 <button className="text-sm text-muted-foreground font-medium">View All</button>
@@ -124,16 +127,21 @@ export default function LipaNaMpesaPage() {
             </div>
 
             {/* Input Fields */}
-            <div className="mx-4 mt-6 space-y-3">
+            <div className="mx-4 mt-2 space-y-1.5">
               {/* Merchant Number Input */}
               <h3 className="text-foreground">Enter till number</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="tel"
                     placeholder="Enter till Number"
                     value={merchantNumber}
-                    onChange={(e) => setMerchantNumber(e.target.value)}
+                    onChange={(e) => {
+                      setMerchantNumber(e.target.value);
+                      setMerchantInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setMerchantInputActive(true)}
+                    onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative">
@@ -226,12 +234,17 @@ export default function LipaNaMpesaPage() {
 
               {/* Amount Input */}
               <h3 className="text-foreground">Enter amount</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setAmountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAmountInputActive(true)}
+                    onBlur={() => setAmountInputActive(amount.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
                   />
                   <span className="text-muted-foreground font-medium">Ksh</span>
@@ -255,7 +268,7 @@ export default function LipaNaMpesaPage() {
         ) : activeTab === "pay-bill" ? (
           <>
             {/* Favourites Section */}
-            <div className="mx-4 mt-6">
+            <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-foreground">Favourites</h3>
                 <button className="text-sm text-muted-foreground font-medium">View All</button>
@@ -273,16 +286,21 @@ export default function LipaNaMpesaPage() {
               </div>
             </div>
 
-            <div className="mx-4 mt-6 space-y-3">
+            <div className="mx-4 mt-2 space-y-1.5">
               {/* Business Number Input */}
               <h3 className="text-foreground">Enter paybill</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="tel"
                     placeholder="Enter paybill"
                     value={merchantNumber}
-                    onChange={(e) => setMerchantNumber(e.target.value)}
+                    onChange={(e) => {
+                      setMerchantNumber(e.target.value);
+                      setMerchantInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setMerchantInputActive(true)}
+                    onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
@@ -379,13 +397,18 @@ export default function LipaNaMpesaPage() {
 
               {/* Account Number Input */}
               <h3 className="text-foreground">Enter account number</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${accountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="text"
                     placeholder="Enter Account Number"
                     value={accountNumber}
-                    onChange={(e) => setAccountNumber(e.target.value)}
+                    onChange={(e) => {
+                      setAccountNumber(e.target.value);
+                      setAccountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAccountInputActive(true)}
+                    onBlur={() => setAccountInputActive(accountNumber.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
@@ -396,12 +419,17 @@ export default function LipaNaMpesaPage() {
 
               {/* Amount Input */}
               <h3 className="text-foreground">Enter amount</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setAmountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAmountInputActive(true)}
+                    onBlur={() => setAmountInputActive(amount.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
                   />
                   <span className="text-muted-foreground font-medium">Ksh</span>
@@ -425,7 +453,7 @@ export default function LipaNaMpesaPage() {
         ) : activeTab === "pochi-la-biashara" ? (
           <>
             {/* Favourites Section */}
-            <div className="mx-4 mt-6">
+            <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-foreground">Favourites</h3>
                 <button className="text-sm text-muted-foreground font-medium">View All</button>
@@ -443,16 +471,21 @@ export default function LipaNaMpesaPage() {
               </div>
             </div>
 
-            <div className="mx-4 mt-6 space-y-3">
+            <div className="mx-4 mt-2 space-y-1.5">
               {/* Merchant Input */}
               <h3 className="text-foreground">Enter your phone number</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="tel"
                     placeholder="Enter Phone Number"
                     value={merchantNumber}
-                    onChange={(e) => setMerchantNumber(e.target.value)}
+                    onChange={(e) => {
+                      setMerchantNumber(e.target.value);
+                      setMerchantInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setMerchantInputActive(true)}
+                    onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
@@ -463,12 +496,17 @@ export default function LipaNaMpesaPage() {
 
               {/* Amount Input */}
               <h3 className="text-foreground">Enter amount</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setAmountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAmountInputActive(true)}
+                    onBlur={() => setAmountInputActive(amount.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
                   />
                   <span className="text-muted-foreground font-medium">Ksh</span>
@@ -492,7 +530,7 @@ export default function LipaNaMpesaPage() {
         ) : null}
 
         {/* Select Payment Method */}
-        <div className="mx-4 mt-6">
+        <div className="mx-4 mt-2">
           <h3 className="font-semibold text-sm text-foreground mb-2">Select Payment Method</h3>
           <div className="flex gap-3">
             {/* M-PESA Card */}
@@ -617,7 +655,7 @@ export default function LipaNaMpesaPage() {
         </div>
 
         {/* Continue Button */}
-        <div className="mx-4 mt-6">
+        <div className="mx-4 mt-2">
           <button
             onClick={handleContinue}
             disabled={
@@ -638,6 +676,15 @@ export default function LipaNaMpesaPage() {
           </button>
         </div>
 
+        {/* Educational Disclaimer */}
+        <div className="px-6 pb-4 pt-2 shrink-0 border-t border-border mt-2">
+          <p className="text-center text-[11px] text-muted-foreground leading-tight font-medium">
+            Educational Clone Only — Not Affiliated with Safaricom
+          </p>
+          <p className="text-center text-[11px] text-muted-foreground leading-tight mt-1">
+            For training and demonstration purposes only.
+          </p>
+        </div>
 
       </div>
     </div>

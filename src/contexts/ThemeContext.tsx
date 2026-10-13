@@ -32,6 +32,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     root.classList.remove("light", "dark");
     root.classList.add(effectiveTheme);
+
+    // Set initial theme-color
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute(
+        "content",
+        effectiveTheme === "dark" ? "#0D0D0D" : "#F5F5F5"
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -58,7 +67,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (metaThemeColor) {
         metaThemeColor.setAttribute(
           "content",
-          effectiveTheme === "dark" ? "#020302" : "#F5F5F5"
+          effectiveTheme === "dark" ? "#0D0D0D" : "#F5F5F5"
         );
       }
     }
@@ -78,7 +87,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (metaThemeColor) {
         metaThemeColor.setAttribute(
           "content",
-          effectiveTheme === "dark" ? "#020302" : "#F5F5F5"
+          effectiveTheme === "dark" ? "#0D0D0D" : "#F5F5F5"
         );
       }
     };

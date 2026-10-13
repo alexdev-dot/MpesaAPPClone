@@ -104,7 +104,7 @@
   --mpesa-red-dark: #D7110C;
 
   /* Safaricom Typography System */
-  --font-family-app: -apple-system, BlinkMacSystemFont, "Roboto", "Inter", sans-serif;
+  --font-family-app: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 
   /* Font Sizes (8dp scale system) */
   --font-size-display: 1.75rem; /* 28px - Account Balance */
@@ -123,48 +123,61 @@
 }
 
 .dark {
-  /* M-PESA One Dark Mode Colors */
-  --background: #020302;
-  --foreground: #E9E9E9;
-  --card: #252525;
-  --card-foreground: #E9E9E9;
-  --popover: #252525;
-  --popover-foreground: #E9E9E9;
-  --primary: #2e8a2a;
+  /* M-PESA One Dark Mode Colors - Professional Refined Palette */
+  --background: #0D0D0D;
+  --foreground: #F5F5F5;
+  --card: #1A1A1A;
+  --card-foreground: #F5F5F5;
+  --popover: #1A1A1A;
+  --popover-foreground: #F5F5F5;
+  --primary: #22C55E;
   --primary-foreground: #FFFFFF;
-  --secondary: #2A2A2A;
-  --secondary-foreground: #E9E9E9;
-  --muted: #1F1F1F;
-  --muted-foreground: #9E9EA4;
-  --accent: #2e8a2a;
+  --secondary: #1F1F1F;
+  --secondary-foreground: #F5F5F5;
+  --muted: #141414;
+  --muted-foreground: #A1A1AA;
+  --accent: #22C55E;
   --accent-foreground: #FFFFFF;
   --destructive: #D7110C;
-  --border: #333333;
-  --input: #333333;
-  --ring: #2e8a2a;
-  --chart-1: #2e8a2a;
-  --chart-2: #9E9EA4;
+  --border: #27272A;
+  --input: #27272A;
+  --ring: #22C55E;
+  --chart-1: #22C55E;
+  --chart-2: #A1A1AA;
   --chart-3: #666666;
   --chart-4: #444444;
-  --chart-5: #2A2A2A;
-  --sidebar: #252525;
-  --sidebar-foreground: #E9E9E9;
-  --sidebar-primary: #2e8a2a;
+  --chart-5: #1F1F1F;
+  --sidebar: #141414;
+  --sidebar-foreground: #F5F5F5;
+  --sidebar-primary: #22C55E;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #1E1E1E;
-  --sidebar-accent-foreground: #E9E9E9;
-  --sidebar-border: #333333;
-  --sidebar-ring: #2e8a2a;
+  --sidebar-accent: #1A1A1A;
+  --sidebar-accent-foreground: #F5F5F5;
+  --sidebar-border: #27272A;
+  --sidebar-ring: #22C55E;
 
-  /* M-PESA Brand Colors in Dark Mode */
-  --mpesa-green: #3aa335;
-  --mpesa-green-dark: #2e8a2a;
-  --mpesa-green-light: #4caf50;
+  /* Surface Elevation System */
+  --surface-0: #0D0D0D;
+  --surface-1: #141414;
+  --surface-2: #1A1A1A;
+  --surface-3: #1F1F1F;
+  --surface-4: #27272A;
+
+  /* Shadow System for Depth */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+
+  /* M-PESA Brand Colors in Dark Mode - Brighter for Contrast */
+  --mpesa-green: #22C55E;
+  --mpesa-green-dark: #16A34A;
+  --mpesa-green-light: #4ADE80;
   --mpesa-red: #D7110C;
   --mpesa-red-dark: #B50E0A;
 
   /* Header background - darker than cards */
-  --header: #1A1A1A;
+  --header: #0A0A0A;
+  --header-border: #1A1A1A;
 }
 
 @layer base {
@@ -174,12 +187,77 @@
   body {
     @apply bg-background text-foreground;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+    transition: background-color 150ms ease-out, color 150ms ease-out;
   }
   html {
     @apply font-sans;
-    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+    transition: background-color 150ms ease-out, color 150ms ease-out;
   }
+}
+
+/* Dark Mode Specific Enhancements */
+.dark .bg-card {
+  background-color: var(--surface-2);
+  border: 1px solid var(--surface-4);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.dark .bg-card:hover {
+  background-color: var(--surface-3);
+  border-color: var(--surface-4);
+}
+
+.dark .bg-muted {
+  background-color: var(--surface-1);
+  transition: background-color 150ms ease-out;
+}
+
+.dark .border-border {
+  border-color: var(--surface-4);
+}
+
+.dark .hover\:bg-muted:hover {
+  background-color: var(--surface-3);
+}
+
+.dark button:active {
+  transform: scale(0.98);
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: var(--mpesa-green);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.dark *:focus-visible {
+  outline: 2px solid var(--mpesa-green);
+  outline-offset: 2px;
+}
+
+.dark button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+}
+
+.dark header,
+.dark .sticky {
+  background-color: var(--header);
+  border-bottom: 1px solid var(--header-border);
+  backdrop-filter: blur(10px);
+}
+
+.dark .shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.dark .shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.dark .shadow-lg {
+  box-shadow: var(--shadow-lg);
 }
 
 /* Theme-aware utility classes */

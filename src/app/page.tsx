@@ -2,18 +2,25 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
 import SplashScreen from "@/components/SplashScreen";
 
 export default function HomePage() {
-  const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/dashboard");
-    }
-  }, [isAuthenticated, router]);
+    const hasSeenOnboarding = localStorage.getItem("has_seen_onboarding");
+
+    // Navigate after splash completes (3.5 seconds)
+    const timer = setTimeout(() => {
+      if (hasSeenOnboarding) {
+        router.push("/login");
+      } else {
+        router.push("/onboarding");
+      }
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return <SplashScreen />;
 }

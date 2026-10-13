@@ -16,6 +16,9 @@ function SendMoneyPageContent() {
   const [pochiMerchant, setPochiMerchant] = useState("");
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [phoneInputActive, setPhoneInputActive] = useState(false);
+  const [amountInputActive, setAmountInputActive] = useState(false);
+  const [pochiInputActive, setPochiInputActive] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -73,7 +76,7 @@ function SendMoneyPageContent() {
       </div>
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto pb-4">
+      <div className="flex-1 overflow-y-auto pb-2">
         {/* Navigation Tabs */}
         <div className="mx-4 mt-2">
           <div className="bg-muted rounded-2xl flex p-1 border border-border">
@@ -103,7 +106,7 @@ function SendMoneyPageContent() {
         {activeTab === "mobile" ? (
           <>
             {/* Favourites Section */}
-            <div className="mx-4 mt-3">
+            <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-foreground">Favourites</h3>
                 <button className="text-sm text-muted-foreground font-medium">View All</button>
@@ -122,16 +125,21 @@ function SendMoneyPageContent() {
             </div>
 
             {/* Input Fields */}
-            <div className="mx-4 mt-3 space-y-2">
+            <div className="mx-4 mt-2 space-y-1.5">
               {/* Phone Number Input */}
               <h3 className="text-foreground">Enter your phone number</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${phoneInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="tel"
                     placeholder="Enter Phone Number"
                     value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    onChange={(e) => {
+                      setPhoneNumber(e.target.value);
+                      setPhoneInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setPhoneInputActive(true)}
+                    onBlur={() => setPhoneInputActive(phoneNumber.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
@@ -228,12 +236,17 @@ function SendMoneyPageContent() {
 
               {/* Amount Input */}
               <h3 className="text-foreground">Enter amount</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setAmountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAmountInputActive(true)}
+                    onBlur={() => setAmountInputActive(amount.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
                   />
                   <span className="text-muted-foreground font-medium">Ksh</span>
@@ -257,7 +270,7 @@ function SendMoneyPageContent() {
         ) : (
           <>
             {/* Pochi la Biashara Content */}
-            <div className="mx-4 mt-3">
+            <div className="mx-4 mt-2">
               {/* Favourites Section */}
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold text-foreground">Favourites</h3>
@@ -276,16 +289,21 @@ function SendMoneyPageContent() {
               </div>
             </div>
 
-            <div className="mx-4 mt-3 space-y-2">
+            <div className="mx-4 mt-2 space-y-1.5">
               {/* Merchant Input */}
               <h3 className="text-foreground">Enter your phone number</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${pochiInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="tel"
                     placeholder="Enter Phone Number"
                     value={pochiMerchant}
-                    onChange={(e) => setPochiMerchant(e.target.value)}
+                    onChange={(e) => {
+                      setPochiMerchant(e.target.value);
+                      setPochiInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setPochiInputActive(true)}
+                    onBlur={() => setPochiInputActive(pochiMerchant.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
                   />
                   <div className="flex items-center gap-2">
@@ -296,12 +314,17 @@ function SendMoneyPageContent() {
 
               {/* Amount Input */}
               <h3 className="text-foreground">Enter amount</h3>
-              <div className="bg-background rounded-xl p-3 border-2 border-foreground/20">
+              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setAmountInputActive(e.target.value.length > 0);
+                    }}
+                    onFocus={() => setAmountInputActive(true)}
+                    onBlur={() => setAmountInputActive(amount.length > 0)}
                     className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
                   />
                   <span className="text-muted-foreground font-medium">Ksh</span>
@@ -325,7 +348,7 @@ function SendMoneyPageContent() {
         )}
 
         {/* Select Payment Method */}
-        <div className="mx-4 mt-3">
+        <div className="mx-4 mt-2">
           <h3 className="font-semibold text-sm text-foreground mb-2">Select Payment Method</h3>
           <div className="flex gap-3">
             {/* M-PESA Card */}
@@ -411,7 +434,7 @@ function SendMoneyPageContent() {
         </div>
 
         {/* Continue Button */}
-        <div className="mx-4 mt-4">
+        <div className="mx-4 mt-2">
           <button
             onClick={handleContinue}
             disabled={activeTab === "mobile" ? (!phoneNumber || !amount) : (!pochiMerchant || !amount)}
@@ -452,6 +475,16 @@ function SendMoneyPageContent() {
             </div>
           </div>
         )}
+
+        {/* Educational Disclaimer */}
+        <div className="px-6 pb-4 pt-2 shrink-0 border-t border-border mt-2">
+          <p className="text-center text-[11px] text-muted-foreground leading-tight font-medium">
+            Educational Clone Only — Not Affiliated with Safaricom
+          </p>
+          <p className="text-center text-[11px] text-muted-foreground leading-tight mt-1">
+            For training and demonstration purposes only.
+          </p>
+        </div>
       </div>
     </div>
   );

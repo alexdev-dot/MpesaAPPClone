@@ -13,7 +13,10 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    const hasSeenOnboarding = localStorage.getItem("has_seen_onboarding");
+    if (!hasSeenOnboarding) {
+      router.push("/splash");
+    } else if (isAuthenticated) {
       router.push("/dashboard");
     }
   }, [isAuthenticated, router]);
@@ -186,6 +189,16 @@ export default function LoginPage() {
             </svg>
           </button>
         </div>
+      </div>
+
+      {/* Educational Disclaimer */}
+      <div className="px-6 pb-4 pt-2 shrink-0 border-t border-border mt-2">
+        <p className="text-center text-[11px] text-muted-foreground leading-tight font-medium">
+          Educational Clone Only — Not Affiliated with Safaricom
+        </p>
+        <p className="text-center text-[11px] text-muted-foreground leading-tight mt-1">
+          For training and demonstration purposes only.
+        </p>
       </div>
     </div>
   );

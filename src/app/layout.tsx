@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Roboto, Inter } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const inter = Inter({
@@ -33,14 +34,14 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: "cover",
-  themeColor: "#3aa335",
+  themeColor: "#0D0D0D",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${roboto.variable} ${inter.variable} h-full antialiased`}
+      className={`${poppins.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
