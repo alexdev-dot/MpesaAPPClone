@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
   const [isValidating, setIsValidating] = useState(false);
-  const [showBiometricOption, setShowBiometricOption] = useState(false);
   const { login, loginWithBiometric, registerBiometric, isBiometricAvailable, hasBiometricRegistered, isAuthenticated } = useAuth();
   const router = useRouter();
   const biometricAttempted = useRef(false);
@@ -64,9 +63,9 @@ export default function LoginPage() {
     } else if (isAuthenticated) {
       router.push("/dashboard");
     } else if (isBiometricAvailable() && !biometricAttempted.current) {
-      // Show biometric option if available
+      // Automatically prompt biometric authentication if available
       biometricAttempted.current = true;
-      setShowBiometricOption(true);
+      handleBiometricAuth();
     }
   }, [isAuthenticated, router, isBiometricAvailable]);
 
@@ -133,31 +132,6 @@ export default function LoginPage() {
 
         {/* Masked Phone Number */}
         <p className="text-muted-foreground text-xs mb-3" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>071*****78</p>
-
-        {/* Biometric Prompt */}
-        {showBiometricOption && !isValidating && (
-          <button
-            onClick={handleBiometricAuth}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-mpesa-green bg-card hover:bg-muted transition-all active:scale-95"
-          >
-            <svg
-              className="w-5 h-5 text-mpesa-green"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.85.577-4.147"
-              />
-            </svg>
-            <span className="text-xs font-medium text-mpesa-green" style={{ fontFamily: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
-              {hasBiometricRegistered() ? "Use Biometric" : "Set up Biometric"}
-            </span>
-          </button>
-        )}
       </div>
 
       {/* Alert Message Card */}
