@@ -540,17 +540,17 @@ export default function DashboardPage() {
                 }}
                 className="flex flex-col items-center gap-1 p-1.5 rounded-lg"
               >
-                <div className="w-9 h-9 bg-muted rounded-full flex items-center justify-center relative">
+                <div className="w-11 h-11 bg-muted rounded-full flex items-center justify-center relative">
                   {action.image ? (
-                    <img src={action.image} alt={action.label} className="w-4 h-4 object-contain" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}} />
+                    <img src={action.image} alt={action.label} className="w-5 h-5 object-contain" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(95%) saturate(1000%) hue-rotate(110deg) brightness(90%) contrast(90%)'}} />
                   ) : action.icon === PataMoreIcon ? (
-                    <PataMoreIcon className="w-8 h-8" />
+                    <PataMoreIcon className="w-9 h-9" />
                   ) : action.icon === ShoppingBasketIcon ? (
-                    <ShoppingBasketIcon className="w-4 h-4" />
+                    <ShoppingBasketIcon className="w-5 h-5" />
                   ) : action.icon === HomeInternetIcon ? (
-                    <HomeInternetIcon className="w-4 h-4" />
+                    <HomeInternetIcon className="w-5 h-5" />
                   ) : (
-                    <Icon className="w-4 h-4 text-mpesa-green" />
+                    <Icon className="w-5 h-5 text-mpesa-green" />
                   )}
                   {/* Red corner marker for Airtime Top up */}
                   {action.hasCornerMarker && (
@@ -858,6 +858,13 @@ export default function DashboardPage() {
           </button>
         </div>
       </div>
+
+      {/* Educational Disclaimer */}
+      <div className="bg-background/95 backdrop-blur-sm px-3 py-1 border-t border-border mt-2">
+        <p className="text-center text-[9px] text-muted-foreground leading-tight">
+          Educational Clone Only — Not Affiliated with Safaricom. For training and demonstration purposes only.
+        </p>
+      </div>
       </div>
 
       {/* Floating Help Card - Bouncing Animation */}
@@ -888,9 +895,9 @@ export default function DashboardPage() {
       {/* Floating QR Code below Avatar */}
       <button
         onClick={() => router.push("/chat-zuri")}
-        className={`fixed bottom-4 right-3 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out hover:bg-muted ${isQRCodeCollapsed ? 'w-14 h-14 p-0 justify-center' : 'w-44 p-2 justify-between'}`}
+        className={`fixed bottom-4 right-3 bg-card rounded-lg shadow-lg border-2 border-border z-50 flex items-center transition-all duration-300 ease-in-out hover:bg-muted ${isQRCodeCollapsed ? 'w-14 h-14 p-0 justify-center' : 'w-48 h-12 p-2 justify-between'}`}
       >
-        <div className={`w-8 h-8 bg-card rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-3'}`}>
+        <div className={`w-7 h-7 bg-card rounded flex items-center justify-center relative ${isQRCodeCollapsed ? 'mx-auto' : 'ml-4'}`}>
           {/* Top-left corner marker outside QR code */}
           <svg
             viewBox="0 0 24 24"
@@ -975,17 +982,8 @@ export default function DashboardPage() {
             <rect x="12" y="20" width="2" height="2" />
           </svg>
         </div>
-        <div className={`flex flex-col flex-1 mr-3 ml-8 text-center ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>
-          <span className="text-xs font-semibold text-foreground">Scan to Pay</span>
-        </div>
+        <span className={`flex-1 mr-2 ml-3 text-[11px] font-semibold text-foreground ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>Scan to Pay</span>
       </button>
-
-      {/* Educational Disclaimer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm px-3 py-1 z-60 border-t border-border">
-        <p className="text-center text-[9px] text-muted-foreground leading-tight">
-          Educational Clone Only — Not Affiliated with Safaricom. For training and demonstration purposes only.
-        </p>
-      </div>
     </div>
   );
 }
