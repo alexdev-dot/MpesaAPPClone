@@ -43,7 +43,7 @@ export default function WithdrawMoneyPage() {
 
   const handleContinue = () => {
     if (activeTab === "agent" && agentNumber && amount) {
-      console.log("Processing withdrawal:", { agentNumber, amount, paymentMethod: selectedPaymentMethod });
+      console.log("Processing withdrawal:", { agentNumber, amount });
     }
   };
 
