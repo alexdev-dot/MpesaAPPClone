@@ -119,7 +119,7 @@ export default function ChatZuriPage() {
       </div>
 
       {/* Input Area */}
-      <div className="bg-card px-4 py-3 border-t border-border shrink-0">
+      <div className="bg-card px-4 py-2 border-t border-border shrink-0">
         <div className="flex items-center gap-3">
           <div className="flex-1 relative">
             <input
@@ -128,7 +128,7 @@ export default function ChatZuriPage() {
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               placeholder="Type a message..."
-              className="w-full bg-muted text-foreground rounded-lg px-4 py-4 pr-12 text-sm focus:outline-none caret-foreground"
+              className="w-full bg-muted text-foreground rounded-lg px-4 py-3 pr-12 text-sm focus:outline-none caret-foreground"
               style={{ '::placeholder': { color: 'rgba(102, 102, 102, 0.7)' } } as any}
             />
             {message && (

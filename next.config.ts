@@ -12,7 +12,7 @@ const nextConfig = withPWAInit({
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
-  allowedDevOrigins: ['10.1.0.27', '10.1.2.30'],
+  allowedDevOrigins: ['10.1.0.27', '10.1.2.30', '10.1.3.13'],
   turbopack: {
     rules: {
       "*.css": {

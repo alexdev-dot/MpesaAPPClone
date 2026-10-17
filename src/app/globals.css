@@ -316,6 +316,11 @@
     font-size: 18px !important;
   }
 
+  /* Tab buttons exception - allow smaller font size */
+  button[class*="text-\\["] {
+    font-size: inherit !important;
+  }
+
   /* Prevent pull-to-refresh on mobile */
   body {
     overscroll-behavior-y: contain;

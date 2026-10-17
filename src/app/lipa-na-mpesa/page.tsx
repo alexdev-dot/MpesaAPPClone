@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, Store, Ticket, Check, Building2, Search } from "lucide-react";
+import { ChevronLeft, Ticket, Check, Search } from "lucide-react";
 
 export default function LipaNaMpesaPage() {
   const { user, isAuthenticated } = useAuth();
@@ -53,28 +53,28 @@ export default function LipaNaMpesaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Top Bar */}
-      <div className="sticky top-0 z-20 bg-background">
-        <div className="px-4 py-2 flex items-center justify-center relative">
+      <div className="sticky top-0 z-20 bg-background shrink-0">
+        <div className="px-4 py-5 flex items-center justify-center relative">
           <button
             onClick={() => router.push("/dashboard")}
-            className="absolute left-4 w-10 h-10 flex items-center justify-center bg-card border border-border rounded-full hover:bg-muted transition-colors"
+            className="absolute left-4 w-9 h-9 flex items-center justify-center bg-card border border-border rounded-full hover:bg-muted transition-colors"
           >
-            <ChevronLeft className="w-6 h-6 text-foreground" strokeWidth={2} />
+            <ChevronLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
           </button>
-          <h1 className="text-lg font-semibold text-foreground">Lipa na M-PESA</h1>
+          <h1 className="text-base font-semibold text-foreground">Lipa na M-PESA</h1>
         </div>
       </div>
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto pb-2">
+      {/* Content */}
+      <div className="flex-1 pb-2 overflow-hidden">
         {/* Navigation Tabs */}
-        <div className="mx-4 mt-2">
-          <div className="bg-muted rounded-2xl flex p-1 border border-border">
+        <div className="mx-4 mt-4">
+          <div className="bg-muted rounded-3xl flex p-0.5 border border-border">
             <button
               onClick={() => setActiveTab("buy-goods")}
-              className={`flex-1 px-2 py-2 text-xs font-medium rounded-2xl transition-colors whitespace-nowrap ${
+              className={`flex-1 px-2 py-2 text-[8px] font-medium rounded-3xl transition-colors whitespace-nowrap ${
                 activeTab === "buy-goods"
                   ? "bg-mpesa-green text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground"
@@ -84,7 +84,7 @@ export default function LipaNaMpesaPage() {
             </button>
             <button
               onClick={() => setActiveTab("pay-bill")}
-              className={`flex-1 px-2 py-2 text-xs font-medium rounded-2xl transition-colors whitespace-nowrap ${
+              className={`flex-1 px-2 py-2 text-[8px] font-medium rounded-3xl transition-colors whitespace-nowrap ${
                 activeTab === "pay-bill"
                   ? "bg-mpesa-green text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground"
@@ -94,7 +94,7 @@ export default function LipaNaMpesaPage() {
             </button>
             <button
               onClick={() => setActiveTab("pochi-la-biashara")}
-              className={`flex-1 px-2 py-2 text-xs font-medium rounded-2xl transition-colors whitespace-nowrap ${
+              className={`flex-1 px-2 py-2 text-[8px] font-medium rounded-3xl transition-colors whitespace-nowrap ${
                 activeTab === "pochi-la-biashara"
                   ? "bg-mpesa-green text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground"
@@ -110,18 +110,18 @@ export default function LipaNaMpesaPage() {
             {/* Favourites Section */}
             <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-foreground">Favourites</h3>
-                <button className="text-sm text-muted-foreground font-medium">View All</button>
+                <h3 className="text-sm font-semibold text-foreground">Favourites</h3>
+                <button className="text-[10px] text-muted-foreground font-medium">View All</button>
               </div>
               <div className="flex gap-3">
                 <div className="flex flex-col items-center gap-2">
-                  <button className="w-14 h-14 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <button className="w-12 h-12 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="12" y1="5" x2="12" y2="19" stroke="var(--mpesa-green)" />
                       <line x1="5" y1="12" x2="19" y2="12" stroke="#dc2626" />
                     </svg>
                   </button>
-                  <span className="text-xs text-foreground">Add</span>
+                  <span className="text-[11px] text-foreground">Add</span>
                 </div>
               </div>
             </div>
@@ -129,9 +129,9 @@ export default function LipaNaMpesaPage() {
             {/* Input Fields */}
             <div className="mx-4 mt-2 space-y-1.5">
               {/* Merchant Number Input */}
-              <h3 className="text-foreground">Enter till number</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter till number</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="tel"
                     placeholder="Enter till Number"
@@ -142,100 +142,104 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setMerchantInputActive(true)}
                     onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative">
-                    {/* Top-left corner marker */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="absolute w-2.5 h-2.5 top-0 left-0"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3 11V3H11"
-                        stroke="#dc2626"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {/* Top-right corner marker */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="absolute w-2.5 h-2.5 top-0 right-0"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M21 11V3H13"
-                        stroke="#dc2626"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {/* Bottom-left corner marker */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="absolute w-2.5 h-2.5 bottom-0 left-0"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3 13V21H11"
-                        stroke="#dc2626"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {/* Bottom-right corner marker */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="absolute w-2.5 h-2.5 bottom-0 right-0"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M21 13V21H13"
-                        stroke="#dc2626"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <svg className="w-7 h-7 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="2" y="2" width="6" height="6" rx="1" />
-                      <rect x="4" y="4" width="2" height="2" fill="white" />
-                      <rect x="16" y="2" width="6" height="6" rx="1" />
-                      <rect x="18" y="4" width="2" height="2" fill="white" />
-                      <rect x="2" y="16" width="6" height="6" rx="1" />
-                      <rect x="4" y="18" width="2" height="2" fill="white" />
-                      <rect x="10" y="2" width="2" height="2" />
-                      <rect x="12" y="4" width="2" height="2" />
-                      <rect x="14" y="6" width="2" height="2" />
-                      <rect x="10" y="8" width="2" height="2" />
-                      <rect x="12" y="10" width="2" height="2" />
-                      <rect x="14" y="12" width="2" height="2" />
-                      <rect x="10" y="14" width="2" height="2" />
-                      <rect x="12" y="16" width="2" height="2" />
-                      <rect x="16" y="10" width="2" height="2" />
-                      <rect x="18" y="12" width="2" height="2" />
-                      <rect x="20" y="14" width="2" height="2" />
-                      <rect x="16" y="16" width="2" height="2" />
-                      <rect x="18" y="18" width="2" height="2" />
-                      <rect x="10" y="18" width="2" height="2" />
-                      <rect x="12" y="20" width="2" height="2" />
-                    </svg>
-                  </button>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <img src="/assets/icons/profile/store.png" alt="Store" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
+                    <div className="h-6 w-px bg-border"></div>
+                    <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative shrink-0">
+                      {/* Top-left corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 top-0 left-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 11V3H11"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Top-right corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 top-0 right-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M21 11V3H13"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Bottom-left corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 bottom-0 left-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 13V21H11"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Bottom-right corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 bottom-0 right-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M21 13V21H13"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <svg className="w-7 h-7 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="2" y="2" width="6" height="6" rx="1" />
+                        <rect x="4" y="4" width="2" height="2" fill="white" />
+                        <rect x="16" y="2" width="6" height="6" rx="1" />
+                        <rect x="18" y="4" width="2" height="2" fill="white" />
+                        <rect x="2" y="16" width="6" height="6" rx="1" />
+                        <rect x="4" y="18" width="2" height="2" fill="white" />
+                        <rect x="10" y="2" width="2" height="2" />
+                        <rect x="12" y="4" width="2" height="2" />
+                        <rect x="14" y="6" width="2" height="2" />
+                        <rect x="10" y="8" width="2" height="2" />
+                        <rect x="12" y="10" width="2" height="2" />
+                        <rect x="14" y="12" width="2" height="2" />
+                        <rect x="10" y="14" width="2" height="2" />
+                        <rect x="12" y="16" width="2" height="2" />
+                        <rect x="16" y="10" width="2" height="2" />
+                        <rect x="18" y="12" width="2" height="2" />
+                        <rect x="20" y="14" width="2" height="2" />
+                        <rect x="16" y="16" width="2" height="2" />
+                        <rect x="18" y="18" width="2" height="2" />
+                        <rect x="10" y="18" width="2" height="2" />
+                        <rect x="12" y="20" width="2" height="2" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Amount Input */}
-              <h3 className="text-foreground">Enter amount</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter amount</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="number"
                     value={amount}
@@ -245,9 +249,9 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setAmountInputActive(true)}
                     onBlur={() => setAmountInputActive(amount.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <span className="text-muted-foreground font-medium">Ksh</span>
+                  <span className="text-muted-foreground font-medium shrink-0">Ksh</span>
                 </div>
               </div>
 
@@ -270,27 +274,27 @@ export default function LipaNaMpesaPage() {
             {/* Favourites Section */}
             <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-foreground">Favourites</h3>
-                <button className="text-sm text-muted-foreground font-medium">View All</button>
+                <h3 className="text-sm font-semibold text-foreground">Favourites</h3>
+                <button className="text-[10px] text-muted-foreground font-medium">View All</button>
               </div>
               <div className="flex gap-3">
                 <div className="flex flex-col items-center gap-2">
-                  <button className="w-14 h-14 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <button className="w-12 h-12 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="12" y1="5" x2="12" y2="19" stroke="var(--mpesa-green)" />
                       <line x1="5" y1="12" x2="19" y2="12" stroke="#dc2626" />
                     </svg>
                   </button>
-                  <span className="text-xs text-foreground">Add</span>
+                  <span className="text-[11px] text-foreground">Add</span>
                 </div>
               </div>
             </div>
 
             <div className="mx-4 mt-2 space-y-1.5">
               {/* Business Number Input */}
-              <h3 className="text-foreground">Enter paybill</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter paybill</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="tel"
                     placeholder="Enter paybill"
@@ -301,12 +305,12 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setMerchantInputActive(true)}
                     onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 shrink-0">
                     <Search className="w-6 h-6 text-mpesa-green" strokeWidth={1.5} />
                     <div className="h-6 w-px bg-border"></div>
-                    <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative">
+                    <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative shrink-0">
                       {/* Top-left corner marker */}
                       <svg
                         viewBox="0 0 24 24"
@@ -396,9 +400,9 @@ export default function LipaNaMpesaPage() {
               </div>
 
               {/* Account Number Input */}
-              <h3 className="text-foreground">Enter account number</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${accountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter account number</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${accountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="text"
                     placeholder="Enter Account Number"
@@ -409,18 +413,18 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setAccountInputActive(true)}
                     onBlur={() => setAccountInputActive(accountNumber.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 shrink-0">
                     <Ticket className="w-6 h-6 text-mpesa-green" strokeWidth={1.5} />
                   </div>
                 </div>
               </div>
 
               {/* Amount Input */}
-              <h3 className="text-foreground">Enter amount</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter amount</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="number"
                     value={amount}
@@ -430,9 +434,9 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setAmountInputActive(true)}
                     onBlur={() => setAmountInputActive(amount.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <span className="text-muted-foreground font-medium">Ksh</span>
+                  <span className="text-muted-foreground font-medium shrink-0">Ksh</span>
                 </div>
               </div>
 
@@ -455,27 +459,27 @@ export default function LipaNaMpesaPage() {
             {/* Favourites Section */}
             <div className="mx-4 mt-2">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-foreground">Favourites</h3>
-                <button className="text-sm text-muted-foreground font-medium">View All</button>
+                <h3 className="text-sm font-semibold text-foreground">Favourites</h3>
+                <button className="text-[10px] text-muted-foreground font-medium">View All</button>
               </div>
               <div className="flex gap-3">
                 <div className="flex flex-col items-center gap-2">
-                  <button className="w-14 h-14 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <button className="w-12 h-12 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border hover:border-mpesa-green transition-colors">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="12" y1="5" x2="12" y2="19" stroke="var(--mpesa-green)" />
                       <line x1="5" y1="12" x2="19" y2="12" stroke="#dc2626" />
                     </svg>
                   </button>
-                  <span className="text-xs text-foreground">Add</span>
+                  <span className="text-[11px] text-foreground">Add</span>
                 </div>
               </div>
             </div>
 
             <div className="mx-4 mt-2 space-y-1.5">
               {/* Merchant Input */}
-              <h3 className="text-foreground">Enter your phone number</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter your phone number</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${merchantInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="tel"
                     placeholder="Enter Phone Number"
@@ -486,18 +490,104 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setMerchantInputActive(true)}
                     onBlur={() => setMerchantInputActive(merchantNumber.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 shrink-0">
                     <img src="/assets/icons/common/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
+                    <div className="h-6 w-px bg-border"></div>
+                    <button className="w-7 h-7 bg-muted rounded-full flex items-center justify-center relative shrink-0">
+                      {/* Top-left corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 top-0 left-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 11V3H11"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Top-right corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 top-0 right-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M21 11V3H13"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Bottom-left corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 bottom-0 left-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 13V21H11"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      {/* Bottom-right corner marker */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="absolute w-2.5 h-2.5 bottom-0 right-0"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M21 13V21H13"
+                          stroke="#dc2626"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <svg className="w-7 h-7 text-mpesa-green" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="2" y="2" width="6" height="6" rx="1" />
+                        <rect x="4" y="4" width="2" height="2" fill="white" />
+                        <rect x="16" y="2" width="6" height="6" rx="1" />
+                        <rect x="18" y="4" width="2" height="2" fill="white" />
+                        <rect x="2" y="16" width="6" height="6" rx="1" />
+                        <rect x="4" y="18" width="2" height="2" fill="white" />
+                        <rect x="10" y="2" width="2" height="2" />
+                        <rect x="12" y="4" width="2" height="2" />
+                        <rect x="14" y="6" width="2" height="2" />
+                        <rect x="10" y="8" width="2" height="2" />
+                        <rect x="12" y="10" width="2" height="2" />
+                        <rect x="14" y="12" width="2" height="2" />
+                        <rect x="10" y="14" width="2" height="2" />
+                        <rect x="12" y="16" width="2" height="2" />
+                        <rect x="16" y="10" width="2" height="2" />
+                        <rect x="18" y="12" width="2" height="2" />
+                        <rect x="20" y="14" width="2" height="2" />
+                        <rect x="16" y="16" width="2" height="2" />
+                        <rect x="18" y="18" width="2" height="2" />
+                        <rect x="10" y="18" width="2" height="2" />
+                        <rect x="12" y="20" width="2" height="2" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
 
               {/* Amount Input */}
-              <h3 className="text-foreground">Enter amount</h3>
-              <div className={`bg-background rounded-xl p-3 border-2 transition-colors ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
-                <div className="flex items-center gap-3">
+              <h3 className="text-sm text-foreground">Enter amount</h3>
+              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+                <div className="flex items-center gap-3 w-full">
                   <input
                     type="number"
                     value={amount}
@@ -507,9 +597,9 @@ export default function LipaNaMpesaPage() {
                     }}
                     onFocus={() => setAmountInputActive(true)}
                     onBlur={() => setAmountInputActive(amount.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground"
+                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-sm min-w-0"
                   />
-                  <span className="text-muted-foreground font-medium">Ksh</span>
+                  <span className="text-muted-foreground font-medium shrink-0">Ksh</span>
                 </div>
               </div>
 
@@ -531,30 +621,30 @@ export default function LipaNaMpesaPage() {
 
         {/* Select Payment Method */}
         <div className="mx-4 mt-2">
-          <h3 className="font-semibold text-sm text-foreground mb-2">Select Payment Method</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-2">Select Payment Method</h3>
           <div className="flex gap-3">
             {/* M-PESA Card */}
             <button
               onClick={() => setSelectedPaymentMethod("mpesa")}
-              className={`flex-1 h-28 rounded-xl border-2 transition-colors relative ${
+              className={`flex-1 rounded-xl px-4 py-2.5 border-2 transition-colors relative overflow-hidden shadow-sm ${
                 selectedPaymentMethod === "mpesa"
                   ? "bg-mpesa-green/10 border-mpesa-green"
                   : "bg-card border-border hover:border-muted-foreground/50"
               }`}
             >
               {selectedPaymentMethod === "mpesa" && (
-                <div className="absolute top-0 right-0 w-8 h-8 bg-mpesa-green flex items-center justify-center" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}>
-                  <Check className="w-3 h-3 text-white absolute top-1 right-1" strokeWidth={2.5} />
+                <div className="absolute top-0 right-0 w-7 h-7 bg-mpesa-green flex items-center justify-center" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}>
+                  <Check className="w-2.5 h-2.5 text-white absolute top-1 right-1" strokeWidth={2.5} />
                 </div>
               )}
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="w-10 h-10 flex items-center justify-center mb-2">
+              <div className="flex flex-row items-center gap-2">
+                <div className="w-9 h-9 flex items-center justify-center">
                   <img src="/assets/brands/shiriki-pay.png" alt="M-PESA" className="w-6 h-6 rotate-20" />
                 </div>
-                <div className="text-center">
-                  <div className="font-bold text-sm text-foreground">M-PESA</div>
-                  <div className="text-xs text-muted-foreground mt-1">
-                    Ksh. ******
+                <div className="text-left">
+                  <div className="font-bold text-xs text-foreground">M-PESA</div>
+                  <div className="text-[10px] text-muted-foreground">
+                    {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-2.5 w-14 bg-muted rounded animate-pulse" />}
                   </div>
                 </div>
               </div>
@@ -562,61 +652,61 @@ export default function LipaNaMpesaPage() {
 
             {activeTab !== "pochi-la-biashara" && (
               <>
-            {/* Bonga Points Card */}
-            <button
-              onClick={() => setSelectedPaymentMethod("bonga")}
-              className={`flex-1 h-28 rounded-xl border-2 transition-colors relative ${
-                selectedPaymentMethod === "bonga"
-                  ? "bg-mpesa-green border-mpesa-green"
-                  : "bg-card border-border hover:border-muted-foreground/50"
-              }`}
-            >
-              {selectedPaymentMethod === "bonga" && (
-                <div className="absolute top-2 right-2 w-5 h-5 bg-card rounded-full flex items-center justify-center">
-                  <Check className="w-3 h-3 text-mpesa-green" strokeWidth={2.5} />
-                </div>
-              )}
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
-                  <img src="/assets/services/clay-crafting.png" alt="Bonga Points" className="w-6 h-6" />
-                </div>
-                <div className="text-center">
-                  <div className={`font-medium text-sm ${
-                    selectedPaymentMethod === "bonga" ? "text-white" : "text-foreground"
-                  }`}>Bonga Points</div>
-                  {selectedPaymentMethod === "bonga" ? (
-                    <div className={`text-xs mt-1 ${
-                      selectedPaymentMethod === "bonga" ? "text-white/90" : "text-muted-foreground"
-                    }`}>
-                      {balanceVisible ? `Ksh. ${formatBalance(0)}` : <div className="h-3 w-12 bg-muted rounded animate-pulse mx-auto" />}
+                {/* Bonga Points Card */}
+                <button
+                  onClick={() => setSelectedPaymentMethod("bonga")}
+                  className={`flex-1 rounded-xl px-4 py-2.5 border-2 transition-colors relative shadow-sm ${
+                    selectedPaymentMethod === "bonga"
+                      ? "bg-mpesa-green border-mpesa-green"
+                      : "bg-card border-border hover:border-muted-foreground/50"
+                  }`}
+                >
+                  {selectedPaymentMethod === "bonga" && (
+                    <div className="absolute top-2 right-2 w-4 h-4 bg-card rounded-full flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-mpesa-green" strokeWidth={2.5} />
                     </div>
-                  ) : (
-                    <span className="text-sm text-muted-foreground mt-1">Ksh. 0</span>
                   )}
-                </div>
-              </div>
-            </button>
+                  <div className="flex flex-row items-center gap-2">
+                    <div className="w-9 h-9 bg-card rounded-full flex items-center justify-center">
+                      <img src="/assets/services/clay-crafting.png" alt="Bonga Points" className="w-6 h-6" />
+                    </div>
+                    <div className="text-left">
+                      <div className={`font-medium text-xs ${
+                        selectedPaymentMethod === "bonga" ? "text-white" : "text-foreground"
+                      }`}>Bonga Points</div>
+                      {selectedPaymentMethod === "bonga" ? (
+                        <div className={`text-[10px] ${
+                          selectedPaymentMethod === "bonga" ? "text-white/90" : "text-muted-foreground"
+                        }`}>
+                          {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-2.5 w-14 bg-muted rounded animate-pulse" />}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-muted-foreground">Select</span>
+                      )}
+                    </div>
+                  </div>
+                </button>
               </>
             )}
 
             {/* Shiriki Pay Card */}
             <button
               onClick={() => setSelectedPaymentMethod("shiriki")}
-              className={`flex-1 h-28 rounded-xl border-2 transition-colors relative ${
+              className={`flex-1 rounded-xl px-4 py-2.5 border-2 transition-colors relative shadow-sm ${
                 selectedPaymentMethod === "shiriki"
                   ? "bg-mpesa-green border-mpesa-green"
                   : "bg-card border-border hover:border-muted-foreground/50"
               }`}
             >
               {selectedPaymentMethod === "shiriki" && (
-                <div className="absolute top-2 right-2 w-5 h-5 bg-card rounded-full flex items-center justify-center">
-                  <Check className="w-3 h-3 text-mpesa-green" strokeWidth={2.5} />
+                <div className="absolute top-2 right-2 w-4 h-4 bg-card rounded-full flex items-center justify-center">
+                  <Check className="w-2.5 h-2.5 text-mpesa-green" strokeWidth={2.5} />
                 </div>
               )}
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
+              <div className="flex flex-row items-center gap-2">
+                <div className="w-9 h-9 bg-card rounded-full flex items-center justify-center">
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -626,7 +716,7 @@ export default function LipaNaMpesaPage() {
                       x="12"
                       y="16"
                       textAnchor="middle"
-                      fontSize="16"
+                      fontSize="14"
                       fontWeight="bold"
                       fill="#22c55e"
                       fontFamily="Arial, sans-serif"
@@ -635,18 +725,18 @@ export default function LipaNaMpesaPage() {
                     </text>
                   </svg>
                 </div>
-                <div className="text-center">
-                  <div className={`font-medium text-sm ${
+                <div className="text-left">
+                  <div className={`font-medium text-xs ${
                     selectedPaymentMethod === "shiriki" ? "text-white" : "text-foreground"
                   }`}>Shiriki Pay</div>
                   {selectedPaymentMethod === "shiriki" ? (
-                    <div className={`text-xs mt-1 ${
+                    <div className={`text-[10px] ${
                       selectedPaymentMethod === "shiriki" ? "text-white/90" : "text-muted-foreground"
                     }`}>
-                      {balanceVisible ? `Ksh. ${formatBalance(0)}` : <div className="h-3 w-12 bg-muted rounded animate-pulse mx-auto" />}
+                      {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-2.5 w-14 bg-muted rounded animate-pulse" />}
                     </div>
                   ) : (
-                    <span className="text-sm text-muted-foreground mt-1">Select</span>
+                    <span className="text-xs text-muted-foreground">Select</span>
                   )}
                 </div>
               </div>
@@ -664,7 +754,7 @@ export default function LipaNaMpesaPage() {
               activeTab === "pochi-la-biashara" ? (!merchantNumber || !amount) :
               true
             }
-            className={`w-full py-3 rounded-xl font-medium transition-colors border-2 ${
+            className={`w-full py-2.5 rounded-xl font-medium transition-colors border-2 text-sm ${
               (activeTab === "buy-goods" && merchantNumber && amount) ||
               (activeTab === "pay-bill" && merchantNumber && accountNumber && amount) ||
               (activeTab === "pochi-la-biashara" && merchantNumber && amount)
@@ -685,7 +775,6 @@ export default function LipaNaMpesaPage() {
             For training and demonstration purposes only.
           </p>
         </div>
-
       </div>
     </div>
   );

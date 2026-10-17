@@ -376,14 +376,14 @@ export default function DashboardPage() {
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="bg-background px-4 py-1.5 flex items-center shrink-0 border-b border-border">
+      <div className="bg-background px-4 py-4 flex items-center shrink-0 border-b border-border">
         {/* Profile Icon */}
         <div className="relative -ml-2">
           <button
             onClick={() => router.push("/profile")}
             className="relative"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden">
+            <div className="w-10 h-10 rounded-full overflow-hidden">
               <img
                 src="/assets/avatars/profile-default.jpeg"
                 alt="Profile"
@@ -391,33 +391,33 @@ export default function DashboardPage() {
               />
             </div>
             {/* Dropdown Icon */}
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-gray-200 rounded-full flex items-center justify-center border-2 border-mpesa-green">
-              <ChevronDown className="w-2 h-2 text-mpesa-red" strokeWidth={2} />
+            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-gray-200 rounded-full flex items-center justify-center border-2 border-mpesa-green">
+              <ChevronDown className="w-2.5 h-2.5 text-mpesa-red" strokeWidth={2} />
             </div>
           </button>
         </div>
 
         {/* Greeting and Name */}
-        <div className="flex flex-col ml-2">
-          <div className="text-[10px] text-muted-foreground">{getGreeting()}</div>
+        <div className="flex flex-col ml-3">
+          <div className="text-xs text-muted-foreground">{getGreeting()}</div>
           <div className="flex items-center gap-1">
-            <span className="text-xs text-foreground">{user?.name}</span>
-            <span className="text-sm">👋</span>
+            <span className="text-sm text-foreground">{user?.name}</span>
+            <span className="text-base">👋</span>
           </div>
         </div>
 
         {/* Right Side Icons */}
         <div className="ml-auto flex items-center gap-3">
-          <button className="relative w-8 h-8 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <button className="relative w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" className="text-mpesa-green" />
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" className="text-mpesa-green" />
               <line x1="12" y1="8" x2="12" y2="14" className="text-mpesa-red" strokeWidth="1.5" />
             </svg>
-            <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-mpesa-red rounded-full border-2 border-background"></span>
+            <span className="absolute top-0.5 right-0.5 w-2.5 h-2.5 bg-mpesa-red rounded-full border-2 border-background"></span>
           </button>
-          <button className="w-8 h-8 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-muted transition-colors border border-border">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" className="text-mpesa-green" />
               <path d="m21 21-4.35-4.35" className="text-mpesa-red" />
             </svg>
@@ -428,7 +428,7 @@ export default function DashboardPage() {
       {/* Scrollable Content */}
       <div ref={contentScrollRef} className="flex-1 overflow-y-auto">
       {/* Balance Cards - Horizontal Scroll */}
-      <div className="mx-3 mt-1 shrink-0">
+      <div className="mx-3 mt-3 shrink-0">
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
@@ -438,11 +438,11 @@ export default function DashboardPage() {
           {/* M-PESA Balance Card */}
           <div className="bg-card rounded-xl p-3 shrink-0 w-72 flex flex-col relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-1.25 bg-linear-to-b from-green-500 to-blue-500 rounded-l-xl" />
-            <div className="flex items-center justify-between mb-1.5 ml-2">
-              <span className="text-xs font-medium text-mpesa-green">M-PESA Balance</span>
+            <div className="flex items-center justify-between mb-2 ml-2">
+              <span className="text-sm font-medium text-mpesa-green">M-PESA Balance</span>
             </div>
-            <div className="flex items-center gap-2 mb-1 ml-2">
-              <div className="text-base font-semibold text-foreground">
+            <div className="flex items-center gap-2 mb-2 ml-2">
+              <div className="text-lg font-semibold text-foreground">
                 {balanceVisible ? (
                   formatBalance(0)
                 ) : (
@@ -460,12 +460,12 @@ export default function DashboardPage() {
                 )}
               </button>
             </div>
-            <div className="text-[10px] text-muted-foreground mb-1.5 ml-2">
+            <div className="text-xs text-muted-foreground mb-2 ml-2">
               {balanceVisible ? (
                 `Available fuliza: ${formatBalance(0)}`
               ) : null}
             </div>
-            <button className="w-full py-0.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[9px] mt-auto">
+            <button className="w-auto py-0.5 px-6 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[7px] mt-auto mx-auto">
               View Statements
             </button>
           </div>
@@ -473,19 +473,19 @@ export default function DashboardPage() {
           {/* My Balances Card */}
           <div className="bg-card rounded-xl p-3 shrink-0 w-72 flex flex-col relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-1.25 bg-linear-to-b from-green-500 to-blue-500 rounded-l-xl" />
-            <h3 className="text-xs font-medium text-mpesa-green mb-1.5 ml-2">My Balances</h3>
-            <div className="flex justify-between items-center mb-1.5">
+            <h3 className="text-sm font-medium text-mpesa-green mb-2 ml-2">My Balances</h3>
+            <div className="flex justify-between items-center mb-2">
               <div className="flex flex-col items-start flex-1 ml-2">
-                <div className="text-[10px] font-medium text-foreground mb-0.5">Airtime</div>
-                <div className="text-base font-semibold text-foreground">KSh. 0.00</div>
+                <div className="text-xs font-medium text-foreground mb-0.5">Airtime</div>
+                <div className="text-lg font-semibold text-foreground">KSh. 0.00</div>
               </div>
               <div className="h-8 w-px bg-border mx-4" />
               <div className="flex flex-col items-end flex-1 ml-4 mr-2 min-w-fit">
-                <div className="text-[10px] font-medium text-foreground">Bonga</div>
-                <div className="text-base font-semibold text-foreground">0 <span className="text-[10px] font-semibold text-foreground">Points</span></div>
+                <div className="text-xs font-medium text-foreground">Bonga</div>
+                <div className="text-lg font-semibold text-foreground">0 <span className="text-xs font-semibold text-foreground">Points</span></div>
               </div>
             </div>
-            <button className="w-full py-0.5 mx-2 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[9px] mt-auto">
+            <button className="w-auto py-0.5 px-6 border border-mpesa-green text-mpesa-green font-medium rounded-md hover:bg-mpesa-green/10 transition-colors text-[7px] mt-auto mx-auto">
               View All Balances
             </button>
           </div>
@@ -516,10 +516,10 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-card mx-3 mt-1 rounded-md p-2 shrink-0">
+      <div className="bg-card mx-3 mt-3 rounded-md p-2 shrink-0">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-xs font-semibold text-foreground">Quick Actions</h3>
-          <button className="text-[10px] text-mpesa-green font-medium flex items-center gap-1">
+          <h3 className="text-sm font-semibold text-foreground">Quick Actions</h3>
+          <button className="text-[9px] text-mpesa-green font-medium flex items-center gap-1">
             View All <ChevronRight className="w-3 h-3" />
           </button>
         </div>
@@ -578,9 +578,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Frequent Transactions */}
-      <div className="bg-card mx-3 mt-1 rounded-md p-2 shrink-0">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-xs font-semibold text-foreground">Frequents</h3>
+      <div className="bg-card mx-3 mt-3 rounded-md p-4 shrink-0">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-foreground">Frequents</h3>
           <button
             onClick={() => setShowFrequentDropdown(!showFrequentDropdown)}
             className="p-1 hover:bg-muted rounded-full transition-colors"
@@ -602,7 +602,7 @@ export default function DashboardPage() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-1 px-3 py-0.5 text-[10px] font-medium rounded-xl transition-colors ${
+                  className={`flex-1 px-3 py-1 text-[10px] font-medium rounded-xl transition-colors ${
                     activeTab === tab
                       ? "bg-mpesa-green text-white shadow-sm"
                       : "text-muted-foreground hover:text-foreground hover:bg-card/50"
@@ -641,7 +641,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Monthly Spending Summary */}
-      <div className="mx-3 mt-1 mb-2">
+      <div className="mx-3 mt-3 mb-2">
         <div className="flex items-center mb-2">
           <h3 className="text-xs font-semibold text-foreground">Explore & Discover Deals 🔥</h3>
         </div>
@@ -690,16 +690,16 @@ export default function DashboardPage() {
       </div>
 
       {/* My Finances */}
-      <div className="bg-card mx-3 mt-1 mb-2 rounded-md p-2">
+      <div className="bg-card mx-3 mt-3 mb-2 rounded-md p-2">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-foreground">My Finances</h3>
-          <button className="text-sm text-mpesa-green font-medium flex items-center gap-1">
-            View All <ChevronRight className="w-4 h-4" />
+          <h3 className="text-sm font-semibold text-foreground">My Finances</h3>
+          <button className="text-[10px] text-mpesa-green font-medium flex items-center gap-1">
+            View All <ChevronRight className="w-3 h-3" />
           </button>
         </div>
-        <div className="overflow-x-auto pb-1" style={{ maxWidth: '320px' }}>
-          <div className="flex justify-start" style={{ width: 'max-content', gap: '0px' }}>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+        <div className="overflow-x-auto pb-1 -mx-2 px-2">
+          <div className="flex justify-start gap-3" style={{ width: 'max-content' }}>
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
                   src="/assets/services/ziidi-trader.png"
@@ -713,7 +713,7 @@ export default function DashboardPage() {
                 <span>trader</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <img
@@ -728,7 +728,7 @@ export default function DashboardPage() {
                 <span>Ziiidi</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <TuunzaMapataIcon className="w-8 h-8" />
               </div>
@@ -738,7 +738,7 @@ export default function DashboardPage() {
                 <span>Mapata</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
                   <img
@@ -750,7 +750,7 @@ export default function DashboardPage() {
               </div>
               <span className="text-[10px] text-center text-foreground font-medium">Shiriki Pay</span>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--mpesa-green)' }}>
                   <img
@@ -764,7 +764,7 @@ export default function DashboardPage() {
                 <span>Mali</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-gray-300/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
                   src="/assets/services/Mpesa-ratiba.png"
@@ -778,7 +778,7 @@ export default function DashboardPage() {
                 <span>Ratiba</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-orange-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <img
                   src="/assets/services/mpesa-GO.png"
@@ -792,7 +792,7 @@ export default function DashboardPage() {
                 <span>Go</span>
               </div>
             </button>
-            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0">
+            <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
               <div className="w-10 h-10 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <img
@@ -811,12 +811,12 @@ export default function DashboardPage() {
       </div>
 
       {/* Entertainment */}
-      <div className="bg-card mx-3 mt-1 mb-2 rounded-md p-2">
+      <div className="bg-card mx-3 mt-3 mb-2 rounded-md p-2">
         <div className="flex items-center justify-start mb-2">
           <h3 className="text-xs font-semibold text-foreground">Entertainment</h3>
         </div>
         <div className="flex justify-start gap-3">
-          <button className="flex flex-col items-center gap-1 p-1 rounded-lg">
+          <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
             <div className="w-12 h-12 bg-purple-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/services/baze.png"
@@ -826,7 +826,7 @@ export default function DashboardPage() {
             </div>
             <span className="text-[10px] text-center text-foreground font-medium">Baze</span>
           </button>
-          <button className="flex flex-col items-center gap-1 p-1 rounded-lg">
+          <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
             <div className="w-12 h-12 bg-blue-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/services/games.png"
@@ -836,7 +836,7 @@ export default function DashboardPage() {
             </div>
             <span className="text-[10px] text-center text-foreground font-medium">Games</span>
           </button>
-          <button className="flex flex-col items-center gap-1 p-1 rounded-lg">
+          <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
             <div className="w-12 h-12 bg-orange-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/services/news-paper.png"
@@ -846,7 +846,7 @@ export default function DashboardPage() {
             </div>
             <span className="text-[10px] text-center text-foreground font-medium">News Paper</span>
           </button>
-          <button className="flex flex-col items-center gap-1 p-1 rounded-lg">
+          <button className="flex flex-col items-center gap-1 p-1 rounded-lg shrink-0 min-w-13">
             <div className="w-12 h-12 bg-green-100/60 rounded-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/services/skiza.png"
@@ -982,7 +982,7 @@ export default function DashboardPage() {
             <rect x="12" y="20" width="2" height="2" />
           </svg>
         </div>
-        <span className={`flex-1 mr-2 ml-3 text-[11px] font-semibold text-foreground ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>Scan to Pay</span>
+        <span className={`flex-1 mr-2 ml-3 text-[14px] font-semibold text-foreground ${isQRCodeCollapsed ? 'hidden' : 'opacity-100'}`}>Scan to Pay</span>
       </button>
     </div>
   );
