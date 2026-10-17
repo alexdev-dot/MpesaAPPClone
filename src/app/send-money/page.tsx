@@ -61,28 +61,28 @@ function SendMoneyPageContent() {
   };
 
   return (
-    <div className="h-screen bg-background flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Top Bar */}
-      <div className="sticky top-0 z-20 bg-background shrink-0">
-        <div className="px-4 py-5 flex items-center justify-center relative">
+      <div className="sticky top-0 z-20 bg-background shrink-0 border-b border-border/40">
+        <div className="px-7 py-5 flex items-center justify-center relative">
           <button
             onClick={() => router.push("/dashboard")}
-            className="absolute left-4 w-9 h-9 flex items-center justify-center bg-card border border-border rounded-full hover:bg-muted transition-colors"
+            className="absolute left-6 size-9 flex items-center justify-center hover:bg-muted rounded-full transition-colors"
           >
             <ChevronLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
           </button>
-          <h1 className="text-base font-semibold text-foreground">Send Money</h1>
+          <h1 className="text-[20px] leading-7 font-semibold text-foreground">Send Money</h1>
         </div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 pb-2 overflow-hidden">
+      <div className="flex-1 pb-6">
         {/* Navigation Tabs */}
-        <div className="mx-4 mt-4">
-          <div className="bg-muted rounded-3xl flex p-0.5 border border-border">
+        <div className="mx-7 mt-2">
+          <div className="bg-muted rounded-full flex p-1">
             <button
               onClick={() => setActiveTab("mobile")}
-              className={`flex-1 px-2 py-2 text-[9px] font-medium rounded-3xl transition-colors ${
+              className={`flex-1 px-2 py-2 text-[16px] font-semibold rounded-full transition-colors ${
                 activeTab === "mobile"
                   ? "bg-mpesa-green text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground"
@@ -92,7 +92,7 @@ function SendMoneyPageContent() {
             </button>
             <button
               onClick={() => setActiveTab("pochi")}
-              className={`flex-1 px-2 py-2 text-[9px] font-medium rounded-3xl transition-colors ${
+              className={`flex-1 px-2 py-2 text-[16px] font-semibold rounded-full transition-colors ${
                 activeTab === "pochi"
                   ? "bg-mpesa-green text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground"
@@ -106,10 +106,10 @@ function SendMoneyPageContent() {
         {activeTab === "mobile" ? (
           <>
             {/* Favourites Section */}
-            <div className="mx-4 mt-2">
+            <div className="mx-7 mt-7">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-foreground">Favourites</h3>
-                <button className="text-[10px] text-muted-foreground font-medium">View All</button>
+                <h3 className="text-[16px] font-semibold text-foreground">Favourites</h3>
+                <button className="text-[16px] text-muted-foreground font-medium">View All</button>
               </div>
               <div className="flex gap-3">
                 <div className="flex flex-col items-center gap-2">
@@ -125,10 +125,10 @@ function SendMoneyPageContent() {
             </div>
 
             {/* Input Fields */}
-            <div className="mx-4 mt-2 space-y-1.5">
+            <div className="mx-7 mt-7 flex flex-col gap-5">
               {/* Phone Number Input */}
-              <h3 className="text-sm text-foreground">Enter your phone number</h3>
-              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${phoneInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+              <h3 className="text-[16px] leading-5 text-foreground">Enter your phone number</h3>
+              <div className={`bg-background rounded-xl px-6 py-5 border-2 transition-colors shadow-sm ${phoneInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3 w-full">
                   <input
                     type="tel"
@@ -140,7 +140,7 @@ function SendMoneyPageContent() {
                     }}
                     onFocus={() => setPhoneInputActive(true)}
                     onBlur={() => setPhoneInputActive(phoneNumber.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-[16px] min-w-0"
                   />
                   <div className="flex items-center gap-3 shrink-0">
                     <img src="/assets/icons/common/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
@@ -235,8 +235,8 @@ function SendMoneyPageContent() {
               </div>
 
               {/* Amount Input */}
-              <h3 className="text-sm text-foreground">Enter amount</h3>
-              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+              <h3 className="text-[16px] leading-5 text-foreground">Enter amount</h3>
+              <div className={`bg-background rounded-xl px-6 py-5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3 w-full">
                   <input
                     type="number"
@@ -247,7 +247,7 @@ function SendMoneyPageContent() {
                     }}
                     onFocus={() => setAmountInputActive(true)}
                     onBlur={() => setAmountInputActive(amount.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-[16px] min-w-0"
                   />
                   <span className="text-muted-foreground font-medium shrink-0">Ksh</span>
                 </div>
@@ -270,11 +270,11 @@ function SendMoneyPageContent() {
         ) : (
           <>
             {/* Pochi la Biashara Content */}
-            <div className="mx-4 mt-2">
+            <div className="mx-7 mt-7">
               {/* Favourites Section */}
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-foreground">Favourites</h3>
-                <button className="text-[10px] text-muted-foreground font-medium">View All</button>
+                <h3 className="text-[16px] font-semibold text-foreground">Favourites</h3>
+                <button className="text-[16px] text-muted-foreground font-medium">View All</button>
               </div>
               <div className="flex gap-3">
                 <div className="flex flex-col items-center gap-2">
@@ -289,10 +289,10 @@ function SendMoneyPageContent() {
               </div>
             </div>
 
-            <div className="mx-4 mt-2 space-y-1.5">
+            <div className="mx-7 mt-7 flex flex-col gap-5">
               {/* Merchant Input */}
-              <h3 className="text-sm text-foreground">Enter your phone number</h3>
-              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${pochiInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+              <h3 className="text-[16px] leading-5 text-foreground">Enter your phone number</h3>
+              <div className={`bg-background rounded-xl px-6 py-5 border-2 transition-colors shadow-sm ${pochiInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3 w-full">
                   <input
                     type="tel"
@@ -304,7 +304,7 @@ function SendMoneyPageContent() {
                     }}
                     onFocus={() => setPochiInputActive(true)}
                     onBlur={() => setPochiInputActive(pochiMerchant.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none placeholder:text-muted-foreground placeholder:text-[16px] min-w-0"
                   />
                   <div className="flex items-center gap-2 shrink-0">
                     <img src="/assets/icons/common/user.png" alt="User" className="w-6 h-6" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
@@ -313,8 +313,8 @@ function SendMoneyPageContent() {
               </div>
 
               {/* Amount Input */}
-              <h3 className="text-sm text-foreground">Enter amount</h3>
-              <div className={`bg-background rounded-xl p-2.5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
+              <h3 className="text-[16px] leading-5 text-foreground">Enter amount</h3>
+              <div className={`bg-background rounded-xl px-6 py-5 border-2 transition-colors shadow-sm ${amountInputActive ? 'border-mpesa-green' : 'border-foreground/20'}`}>
                 <div className="flex items-center gap-3 w-full">
                   <input
                     type="number"
@@ -325,7 +325,7 @@ function SendMoneyPageContent() {
                     }}
                     onFocus={() => setAmountInputActive(true)}
                     onBlur={() => setAmountInputActive(amount.length > 0)}
-                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none text-muted-foreground placeholder:text-[16px] min-w-0"
                   />
                   <span className="text-muted-foreground font-medium shrink-0">Ksh</span>
                 </div>
@@ -348,13 +348,13 @@ function SendMoneyPageContent() {
         )}
 
         {/* Select Payment Method */}
-        <div className="mx-4 mt-2">
-          <h3 className="text-sm font-semibold text-foreground mb-2">Select Payment Method</h3>
+        <div className="mx-7 mt-7">
+          <h3 className="text-[16px] font-semibold text-foreground mb-4">Select Payment Method</h3>
           <div className="flex gap-3">
             {/* M-PESA Card */}
             <button
               onClick={() => setSelectedPaymentMethod("mpesa")}
-              className={`flex-1 rounded-xl px-4 py-2.5 border-2 transition-colors relative overflow-hidden shadow-sm ${
+              className={`flex-1 rounded-xl px-4 py-4 border-2 transition-colors relative overflow-hidden shadow-sm ${
                 selectedPaymentMethod === "mpesa"
                   ? "bg-mpesa-green/10 border-mpesa-green"
                   : "bg-card border-border hover:border-muted-foreground/50"
@@ -370,7 +370,7 @@ function SendMoneyPageContent() {
                   <img src="/assets/brands/shiriki-pay.png" alt="M-PESA" className="w-6 h-6 rotate-20" />
                 </div>
                 <div className="text-left">
-                  <div className="font-bold text-xs text-foreground">M-PESA</div>
+                  <div className="font-bold text-[16px] text-foreground">M-PESA</div>
                   <div className="text-[10px] text-muted-foreground">
                     {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-2.5 w-14 bg-muted rounded animate-pulse" />}
                   </div>
@@ -381,7 +381,7 @@ function SendMoneyPageContent() {
             {/* Shiriki Pay Card */}
             <button
               onClick={() => setSelectedPaymentMethod("shiriki")}
-              className={`flex-1 rounded-xl px-4 py-2.5 border-2 transition-colors relative shadow-sm ${
+              className={`flex-1 rounded-xl px-4 py-4 border-2 transition-colors relative shadow-sm ${
                 selectedPaymentMethod === "shiriki"
                   ? "bg-mpesa-green border-mpesa-green"
                   : "bg-card border-border hover:border-muted-foreground/50"
@@ -415,7 +415,7 @@ function SendMoneyPageContent() {
                   </svg>
                 </div>
                 <div className="text-left">
-                  <div className={`font-medium text-xs ${
+                  <div className={`font-medium text-[16px] ${
                     selectedPaymentMethod === "shiriki" ? "text-white" : "text-foreground"
                   }`}>Shiriki Pay</div>
                   {selectedPaymentMethod === "shiriki" ? (
@@ -425,7 +425,7 @@ function SendMoneyPageContent() {
                       {balanceVisible ? `Bal. ${formatBalance(0)}` : <div className="h-2.5 w-14 bg-muted rounded animate-pulse" />}
                     </div>
                   ) : (
-                    <span className="text-xs text-muted-foreground">Select</span>
+                    <span className="text-[16px] text-muted-foreground">Select</span>
                   )}
                 </div>
               </div>
@@ -434,11 +434,11 @@ function SendMoneyPageContent() {
         </div>
 
         {/* Continue Button */}
-        <div className="mx-4 mt-2">
+        <div className="mx-7 mt-7">
           <button
             onClick={handleContinue}
             disabled={activeTab === "mobile" ? (!phoneNumber || !amount) : (!pochiMerchant || !amount)}
-            className={`w-full py-2.5 rounded-xl font-medium transition-colors border-2 text-sm ${
+            className={`w-full py-4 rounded-xl font-medium transition-colors border-2 text-[16px] ${
               (activeTab === "mobile" && phoneNumber && amount) || (activeTab === "pochi" && pochiMerchant && amount)
                 ? "bg-mpesa-green text-white hover:bg-mpesa-green-dark border-mpesa-green"
                 : "bg-secondary text-muted-foreground cursor-not-allowed border-border"
@@ -450,18 +450,18 @@ function SendMoneyPageContent() {
 
         {/* Do More Section - Only show on Mobile tab */}
         {activeTab === "mobile" && (
-          <div className="mx-4 mt-3 mb-6">
-            <h3 className="text-sm font-semibold text-foreground mb-2">Do More</h3>
+          <div className="mx-7 mt-11 mb-6">
+            <h3 className="text-[16px] font-semibold text-foreground mb-6">Do More</h3>
             <div className="grid grid-cols-3 gap-2">
-              <button className="bg-card rounded-xl p-3 flex flex-col items-center gap-1.5 hover:bg-muted transition-colors shadow-sm">
+              <button className="bg-card rounded-2xl px-3 py-7 min-h-44 flex flex-col items-center justify-center gap-4 hover:bg-muted transition-colors shadow-sm">
                 <img src="/assets/services/group.png" alt="Group" className="w-5 h-5" style={{filter: 'brightness(0) saturate(100%) invert(35%) sepia(68%) saturate(585%) hue-rotate(76deg) brightness(102%) contrast(92%)'}} />
                 <span className="text-[11px] text-foreground text-center">Send to<br />Many</span>
               </button>
-              <button className="bg-card rounded-xl p-3 flex flex-col items-center gap-1.5 hover:bg-muted transition-colors shadow-sm">
+              <button className="bg-card rounded-2xl px-3 py-7 min-h-44 flex flex-col items-center justify-center gap-4 hover:bg-muted transition-colors shadow-sm">
                 <Wallet className="w-5 h-5 text-mpesa-green" strokeWidth={1.5} />
                 <span className="text-[11px] text-foreground text-center">Request Money</span>
               </button>
-              <button className="bg-card rounded-xl p-3 flex flex-col items-center gap-1.5 hover:bg-muted transition-colors shadow-sm">
+              <button className="bg-card rounded-2xl px-3 py-7 min-h-44 flex flex-col items-center justify-center gap-4 hover:bg-muted transition-colors shadow-sm">
                 <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center">
                   <img
                     src="/assets/services/ziidi.png"
